@@ -87,10 +87,24 @@ function RepoListTerminal() {
 }
 
 function NexusDiagram() {
+  const { lang } = useLang();
+  const en = lang === "en";
   return (
-    <Terminal title="arquitetura — nexus">
+    <Terminal title={en ? "architecture — nexus" : "arquitetura — nexus"}>
       <pre className="overflow-x-auto text-[11px] leading-relaxed text-slate-300 sm:text-[12px]">
-{`  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+        {en ? (
+`  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+  │  Telemetry   │─────▶│   FastAPI    │─────▶│  Dashboards  │
+  │ (simulation) │ data │   API v1     │ JSON │  real time   │
+  └──────────────┘      └──────┬───────┘      └──────────────┘
+                              │ SQLite
+                              ▼
+                       ┌──────────────┐
+                       │ Diagnostics  │
+                       │   + series   │
+                       └──────────────┘`
+        ) : (
+`  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
   │  Telemetria  │─────▶│   FastAPI    │─────▶│  Dashboards  │
   │ (simulação)  │ dados│   API v1     │ JSON │  tempo real  │
   └──────────────┘      └──────┬───────┘      └──────────────┘
@@ -99,7 +113,8 @@ function NexusDiagram() {
                        ┌──────────────┐
                        │ Diagnósticos │
                        │   + séries   │
-                       └──────────────┘`}
+                       └──────────────┘`
+        )}
       </pre>
     </Terminal>
   );
