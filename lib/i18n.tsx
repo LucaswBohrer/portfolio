@@ -74,7 +74,7 @@ export interface Dict {
     privateRepo: string;
     featured: string;
     updated: string;
-    filters: { all: string; ai: string; automation: string; web: string; embedded: string };
+    filters: { all: string; ai: string; automation: string; web: string; embedded: string; systems: string };
     moreTitle: string;
     moreSubtitle: string;
     caseLabels: {
@@ -232,7 +232,7 @@ const pt: Dict = {
     privateRepo: "Repositório privado",
     featured: "Destaque",
     updated: "atualizado em",
-    filters: { all: "Todos", ai: "IA", automation: "Automação", web: "Web", embedded: "Embarcados" },
+    filters: { all: "Todos", ai: "IA", automation: "Automação", web: "Web", embedded: "Embarcados", systems: "Sistemas" },
     moreTitle: "Mais repositórios",
     moreSubtitle: "Projetos complementares — filtre por área de interesse.",
     caseLabels: {
@@ -485,7 +485,7 @@ const en: Dict = {
     privateRepo: "Private repository",
     featured: "Featured",
     updated: "updated",
-    filters: { all: "All", ai: "AI", automation: "Automation", web: "Web", embedded: "Embedded" },
+    filters: { all: "All", ai: "AI", automation: "Automation", web: "Web", embedded: "Embedded", systems: "Systems" },
     moreTitle: "More repositories",
     moreSubtitle: "Complementary projects — filter by area of interest.",
     caseLabels: {

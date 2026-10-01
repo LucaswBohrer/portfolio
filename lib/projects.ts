@@ -1,4 +1,4 @@
-export type Category = "ai" | "automation" | "web" | "embedded";
+export type Category = "ai" | "automation" | "web" | "embedded" | "systems";
 
 export interface Project {
   slug: string;
@@ -140,6 +140,22 @@ export const projects: Project[] = [
     highlights: {
       pt: ["Design responsivo", "Copy de conversão", "Performance"],
       en: ["Responsive design", "Conversion copy", "Performance"],
+    },
+  },
+  {
+    slug: "legacybank",
+    repo: "LucaswBohrer/legacybank",
+    language: "COBOL",
+    tags: ["COBOL", "GnuCOBOL", "Core bancário", "CLI"],
+    categories: ["systems", "automation"],
+    title: { pt: "LEGACYBANK", en: "LEGACYBANK" },
+    description: {
+      pt: "Núcleo bancário educacional 100% em COBOL (GnuCOBOL): clientes, contas CC/CP, transações com tarifas, processamento em lote, idempotência por TX-ID, journal e auditoria.",
+      en: "Educational banking core 100% in COBOL (GnuCOBOL): clients, checking/savings accounts, fee-based transactions, batch processing, TX-ID idempotency, journaling and audit.",
+    },
+    highlights: {
+      pt: ["40/40 testes passando", "100k transações reconciliadas", "Idempotência por TX-ID"],
+      en: ["40/40 tests passing", "100k transactions reconciled", "TX-ID idempotency"],
     },
   },
   {

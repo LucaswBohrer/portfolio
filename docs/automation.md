@@ -117,3 +117,33 @@ Observação: pushes que criam/atualizam arquivos em `.github/workflows/`
 exigem o escopo `workflow` na credencial. Se o push for rejeitado com
 `refusing to allow ... without 'workflow' scope`, faça o push da sua máquina
 com sua credencial ou crie o arquivo pela interface web do GitHub.
+
+---
+
+# Automação — vigilância de novos repositórios (repo-watch)
+
+## O que é
+
+Workflow `.github/workflows/repo-watch.yml` que roda toda **segunda-feira às 09:00 BRT**
+(cron `0 12 * * 1` UTC) e também manualmente via `workflow_dispatch`.
+
+## O que faz
+
+1. Lista os repositórios públicos de `LucaswBohrer` via GitHub API.
+2. Extrai os repos já curados de `lib/projects.ts` (padrão `repo: "LucaswBohrer/<nome>"`).
+3. Ignora permanentemente: `LucaswBohrer` (repo do perfil README), `portfolio`
+   (o próprio site), forks, arquivados e repos vazios.
+4. Se houver repos novos, cria ou atualiza uma issue com label `repo-watch`
+   contendo os metadados reais da API (nome, URL, descrição, linguagem,
+   datas de criação/push) — nunca inventa título, descrição ou highlights.
+5. Se não houver mais nada pendente, fecha a issue automaticamente.
+
+## Por que curadoria manual
+
+Título, descrição PT/EN, highlights e categoria são conteúdo editorial do
+portfólio. O workflow detecta e notifica; a entrada em `lib/projects.ts`
+é escrita por humano (ou pelo Muse a pedido do Lucas).
+
+## Categorias de filtro disponíveis
+
+`ai` · `automation` · `web` · `embedded` · `systems`

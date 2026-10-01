@@ -359,6 +359,7 @@ const FILTERS: { id: Category | "all"; labelKey: "all" | Category }[] = [
   { id: "automation", labelKey: "automation" },
   { id: "web", labelKey: "web" },
   { id: "embedded", labelKey: "embedded" },
+  { id: "systems", labelKey: "systems" },
 ];
 
 function CompactCard({ p }: { p: Project }) {
