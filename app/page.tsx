@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
+import AuroraPlayground from "@/components/AuroraPlayground";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -38,6 +39,11 @@ export default function Home() {
         {tab === "projects" && (
           <div key="projects" className="tab-panel pt-16">
             <Projects />
+          </div>
+        )}
+        {tab === "playground" && (
+          <div key="playground" className="tab-panel pt-16">
+            <AuroraPlayground />
           </div>
         )}
         {tab === "experience" && (

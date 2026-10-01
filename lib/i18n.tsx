@@ -26,7 +26,7 @@ export interface CaseStudyDict {
 }
 
 export interface Dict {
-  nav: { home: string; about: string; projects: string; experience: string; contact: string };
+  nav: { home: string; about: string; projects: string; playground: string; experience: string; contact: string };
   menu: { open: string; close: string; language: string };
   hero: {
     eyebrow: string;
@@ -151,10 +151,38 @@ export interface Dict {
     rmEgg: string;
     exitEgg: string;
   };
+  playground: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    examplesLabel: string;
+    assemble: string;
+    run: string;
+    step: string;
+    reset: string;
+    stop: string;
+    editorLabel: string;
+    consoleLabel: string;
+    regsLabel: string;
+    disasmLabel: string;
+    stackLabel: string;
+    stdinLabel: string;
+    stdinPlaceholder: string;
+    statusIdle: string;
+    statusAssembled: string;
+    statusRunning: string;
+    statusHalted: string;
+    statusFatal: string;
+    haltedMsg: string;
+    stepsLabel: string;
+    bytesLabel: string;
+    consoleHint: string;
+    stackEmpty: string;
+  };
 }
 
 const pt: Dict = {
-  nav: { home: "Início", about: "Sobre", projects: "Projetos", experience: "Experiência", contact: "Contato" },
+  nav: { home: "Início", about: "Sobre", projects: "Projetos", playground: "Playground", experience: "Experiência", contact: "Contato" },
   menu: { open: "Abrir menu", close: "Fechar menu", language: "Idioma" },
   hero: {
     eyebrow: "Portfólio · 2026",
@@ -444,10 +472,39 @@ const pt: Dict = {
     rmEgg: "boa tentativa. Nada foi apagado (não havia nada para apagar).",
     exitEgg: "este terminal não tem saída. Só explorando mesmo.",
   },
+  playground: {
+    eyebrow: "AURORA VM · jogável",
+    title: "Rode a VM no navegador",
+    subtitle:
+      "O núcleo da AURORA VM — assembler + CPU de 43 instruções — portado para TypeScript e rodando 100% no seu navegador. Escreva Assembly, monte, execute passo a passo e inspecione registradores, flags, stack e disassembly.",
+    examplesLabel: "Exemplos",
+    assemble: "Montar",
+    run: "Executar",
+    step: "Passo",
+    reset: "Resetar",
+    stop: "Parar",
+    editorLabel: "Editor Assembly",
+    consoleLabel: "Console",
+    regsLabel: "Registradores",
+    disasmLabel: "Disassembly",
+    stackLabel: "Stack",
+    stdinLabel: "stdin (para IN)",
+    stdinPlaceholder: "bytes de entrada…",
+    statusIdle: "edite o código e monte para começar",
+    statusAssembled: "montado — pronto para executar",
+    statusRunning: "executando…",
+    statusHalted: "terminou",
+    statusFatal: "erro fatal",
+    haltedMsg: "terminated: NORMAL (HALT), exit code {n}",
+    stepsLabel: "passos",
+    bytesLabel: "bytes",
+    consoleHint: "A saída do programa (OUT / OUTC) aparece aqui.",
+    stackEmpty: "stack vazia",
+  },
 };
 
 const en: Dict = {
-  nav: { home: "Home", about: "About", projects: "Projects", experience: "Experience", contact: "Contact" },
+  nav: { home: "Home", about: "About", projects: "Projects", playground: "Playground", experience: "Experience", contact: "Contact" },
   menu: { open: "Open menu", close: "Close menu", language: "Language" },
   hero: {
     eyebrow: "Portfolio · 2026",
@@ -735,6 +792,35 @@ const en: Dict = {
     editorEgg: "no text editors around here — try `help`.",
     rmEgg: "nice try. Nothing was deleted (there was nothing to delete).",
     exitEgg: "this terminal has no exit. Just keep exploring.",
+  },
+  playground: {
+    eyebrow: "AURORA VM · playable",
+    title: "Run the VM in your browser",
+    subtitle:
+      "The AURORA VM core — assembler + 43-instruction CPU — ported to TypeScript and running 100% in your browser. Write Assembly, assemble, step through execution and inspect registers, flags, stack and disassembly.",
+    examplesLabel: "Examples",
+    assemble: "Assemble",
+    run: "Run",
+    step: "Step",
+    reset: "Reset",
+    stop: "Stop",
+    editorLabel: "Assembly editor",
+    consoleLabel: "Console",
+    regsLabel: "Registers",
+    disasmLabel: "Disassembly",
+    stackLabel: "Stack",
+    stdinLabel: "stdin (for IN)",
+    stdinPlaceholder: "input bytes…",
+    statusIdle: "edit the code and assemble to begin",
+    statusAssembled: "assembled — ready to run",
+    statusRunning: "running…",
+    statusHalted: "finished",
+    statusFatal: "fatal error",
+    haltedMsg: "terminated: NORMAL (HALT), exit code {n}",
+    stepsLabel: "steps",
+    bytesLabel: "bytes",
+    consoleHint: "Program output (OUT / OUTC) shows up here.",
+    stackEmpty: "empty stack",
   },
 };
 

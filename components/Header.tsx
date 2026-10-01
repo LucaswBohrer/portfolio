@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang, type Lang } from "@/lib/i18n";
 
-export type TabId = "home" | "about" | "projects" | "experience" | "contact";
+export type TabId = "home" | "about" | "projects" | "playground" | "experience" | "contact";
 
 interface HeaderProps {
   tab: TabId;
   onTab: (t: TabId) => void;
 }
 
-const tabs: TabId[] = ["home", "about", "projects", "experience", "contact"];
+const tabs: TabId[] = ["home", "about", "projects", "playground", "experience", "contact"];
 
 export default function Header({ tab, onTab }: HeaderProps) {
   const { lang, setLang, t } = useLang();
