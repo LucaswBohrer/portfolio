@@ -175,6 +175,22 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "nexus-echoes",
+    repo: "LucaswBohrer/nexus-echoes",
+    language: "Java",
+    tags: ["Java", "Forge", "Minecraft", "Simulação"],
+    categories: ["systems"],
+    title: { pt: "NEXUS: Echoes of Reality", en: "NEXUS: Echoes of Reality" },
+    description: {
+      pt: "Mod para Minecraft Java 1.20.1 (Forge): slice vertical de exploração, dimensões e tecnologia — sistema de energia cinética com RPM, torque e potência, redes de transmissão com brownout proporcional e máquinas.",
+      en: "Minecraft Java 1.20.1 mod (Forge): vertical slice of exploration, dimensions and technology — kinetic energy system with RPM, torque and power, transmission networks with proportional brownout, and machines.",
+    },
+    highlights: {
+      pt: ["Energia cinética (RPM/torque)", "Redes de transmissão simuladas", "50/50 testes verdes"],
+      en: ["Kinetic energy (RPM/torque)", "Simulated transmission networks", "50/50 tests green"],
+    },
+  },
+  {
     slug: "travel-agent",
     repo: "LucaswBohrer/travel-intelligence-agent",
     language: "TypeScript",
