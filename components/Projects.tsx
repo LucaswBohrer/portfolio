@@ -289,6 +289,18 @@ function CaseCard({ p, index }: { p: Project; index: number }) {
               ) : (
                 <CaseField label={t.projects.caseLabels.result}>{cs.result}</CaseField>
               )}
+              {cs.demo && url && (
+                <CaseField label={t.projects.caseLabels.demo}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-300/90 underline decoration-cyan-300/30 underline-offset-2 transition-colors hover:text-cyan-200"
+                  >
+                    {cs.demo}
+                  </a>
+                </CaseField>
+              )}
             </dl>
             {cs.gallery && cs.gallery.length > 0 && (
               <div className="mt-6 border-t border-white/[0.07] pt-5">

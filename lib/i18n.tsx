@@ -21,6 +21,8 @@ export interface CaseStudyDict {
   /** optional product gallery (real screenshots); captions are localized */
   gallery?: { src: string; width: number; height: number; alt: string; caption: string }[];
   galleryDiagramCaption?: string;
+  /** optional demo/run note, e.g. "Local demo available in the repo README." */
+  demo?: string;
 }
 
 export interface Dict {
@@ -82,6 +84,7 @@ export interface Dict {
       architecture: string;
       challenge: string;
       result: string;
+      demo: string;
       status: string;
       stack: string;
       links: string;
@@ -238,6 +241,7 @@ const pt: Dict = {
       architecture: "Arquitetura",
       challenge: "Desafio técnico",
       result: "Resultado",
+      demo: "Demo",
       status: "Status",
       stack: "Stack",
       links: "Links",
@@ -267,6 +271,7 @@ const pt: Dict = {
         "Manter dados de telemetria consistentes e em tempo real entre simulação, API e interface — sem valores falsos no dashboard.",
       result:
         "Plataforma funcional com fluxo completo de simulação, API, dashboards e diagnósticos, evoluída em múltiplas fases.",
+      demo: "Demo local disponível no README do repositório.",
       status: "Em desenvolvimento ativo",
       stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetria"],
       mediaAlt: "Dashboard do NEXUS exibindo telemetria elétrica em tempo real",
@@ -488,6 +493,7 @@ const en: Dict = {
       architecture: "Architecture",
       challenge: "Technical challenge",
       result: "Result",
+      demo: "Demo",
       status: "Status",
       stack: "Stack",
       links: "Links",
@@ -517,6 +523,7 @@ const en: Dict = {
         "Keeping telemetry data consistent and real-time across simulation, API and UI — with no fake dashboard values.",
       result:
         "Working platform with a complete simulation, API, dashboard and diagnostics flow, evolved across multiple phases.",
+      demo: "Local demo available in the repository README.",
       status: "In active development",
       stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetry"],
       mediaAlt: "NEXUS dashboard showing real-time electrical telemetry",

@@ -52,6 +52,25 @@ de arquivos, módulos ou funções — é a coleta real do pytest.
   no CI" / "Test suite verified in CI" — nunca um número inventado.
 - O número tem `aria-label` explicando que vem de execução automatizada do pytest.
 
+## Por que não há loop infinito
+
+O workflow só é disparado por eventos no repositório **JARVIS**
+(`push` na `master`, `pull_request`, `workflow_dispatch`). A publicação
+escreve no repositório **portfolio**, cujos pushes disparam apenas o deploy
+da Vercel — nada no portfolio dispara o workflow do JARVIS de volta.
+Além disso, o workflow compara o JSON gerado com o anterior e só commita
+quando algo mudou, então execuções sem mudança não geram push algum.
+
+## Como testar manualmente
+
+1. Na aba **Actions** do repo JARVIS, selecione
+   "Publish JARVIS test count" → **Run workflow** (workflow_dispatch).
+   Em PRs o workflow valida sem publicar; em `push`/`workflow_dispatch`
+   ele publica.
+2. Localmente, a coleta pode ser conferida com:
+   `python -m pytest --collect-only -q` (o número na linha
+   `N tests collected` é o que vira `testCount`).
+
 ## Configuração necessária (uma vez)
 
 O workflow precisa de um secret no repositório **JARVIS**
