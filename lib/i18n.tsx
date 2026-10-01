@@ -125,6 +125,32 @@ export interface Dict {
     intents: { label: string; desc: string; subject: string }[];
   };
   footer: { rights: string; builtWith: string; tagline: string };
+  terminal: {
+    title: string;
+    hint: string;
+    inputLabel: string;
+    helpIntro: string;
+    help: { cmd: string; desc: string }[];
+    unknown: string;
+    tryHelp: string;
+    projectsIntro: string;
+    projectUsage: string;
+    projectNotFound: string;
+    stackLabel: string;
+    highlightsLabel: string;
+    repoLabel: string;
+    languageLabel: string;
+    contactTitle: string;
+    skillsTitle: string;
+    expTitle: string;
+    bootFocus: string[];
+    bootStack: string[];
+    bootBase: string;
+    sudoEgg: string;
+    editorEgg: string;
+    rmEgg: string;
+    exitEgg: string;
+  };
 }
 
 const pt: Dict = {
@@ -380,6 +406,44 @@ const pt: Dict = {
     builtWith: "Construído com Next.js, React e Tailwind CSS.",
     tagline: "Do circuito ao deploy.",
   },
+  terminal: {
+    title: "terminal — lucas@dev",
+    hint: "Terminal interativo — digite `help` e tecle Enter.",
+    inputLabel: "Terminal interativo — digite um comando e tecle Enter",
+    helpIntro: "Comandos disponíveis:",
+    help: [
+      { cmd: "help", desc: "mostra esta ajuda" },
+      { cmd: "whoami", desc: "quem é o Lucas" },
+      { cmd: "projetos", desc: "lista os projetos do portfólio" },
+      { cmd: "projeto <nome>", desc: "detalhes de um projeto · ex: projeto aurora-vm" },
+      { cmd: "skills", desc: "habilidades técnicas" },
+      { cmd: "experiencia", desc: "trajetória profissional" },
+      { cmd: "contato", desc: "como falar comigo" },
+      { cmd: "neofetch", desc: "ficha rápida do sistema" },
+      { cmd: "cv", desc: "link para o currículo em PDF" },
+      { cmd: "echo <texto>", desc: "repete o texto (clássico)" },
+      { cmd: "clear", desc: "limpa o terminal" },
+    ],
+    unknown: "comando não encontrado: {cmd}",
+    tryHelp: "Digite `help` para ver os comandos disponíveis.",
+    projectsIntro: "{n} projetos no portfólio — use `projeto <nome>` para detalhes:",
+    projectUsage: "uso: projeto <nome> · ex: projeto aurora-vm",
+    projectNotFound: "projeto não encontrado: {cmd}",
+    stackLabel: "stack",
+    highlightsLabel: "destaques",
+    repoLabel: "repo",
+    languageLabel: "linguagem",
+    contactTitle: "contato —",
+    skillsTitle: "habilidades —",
+    expTitle: "experiência —",
+    bootFocus: ["IA", "automação", "sistemas"],
+    bootStack: ["Python", "TypeScript", "APIs"],
+    bootBase: "circuitos → deploy",
+    sudoEgg: "permission denied: por aqui ninguém tem sudo. Nem eu.",
+    editorEgg: "sem editores de texto por aqui — tente `help`.",
+    rmEgg: "boa tentativa. Nada foi apagado (não havia nada para apagar).",
+    exitEgg: "este terminal não tem saída. Só explorando mesmo.",
+  },
 };
 
 const en: Dict = {
@@ -633,6 +697,44 @@ const en: Dict = {
     rights: "All rights reserved.",
     builtWith: "Built with Next.js, React and Tailwind CSS.",
     tagline: "From circuit to deploy.",
+  },
+  terminal: {
+    title: "terminal — lucas@dev",
+    hint: "Interactive terminal — type `help` and press Enter.",
+    inputLabel: "Interactive terminal — type a command and press Enter",
+    helpIntro: "Available commands:",
+    help: [
+      { cmd: "help", desc: "show this help" },
+      { cmd: "whoami", desc: "who Lucas is" },
+      { cmd: "projects", desc: "list portfolio projects" },
+      { cmd: "project <name>", desc: "project details · e.g. project aurora-vm" },
+      { cmd: "skills", desc: "technical skills" },
+      { cmd: "experience", desc: "professional background" },
+      { cmd: "contact", desc: "how to reach me" },
+      { cmd: "neofetch", desc: "quick system sheet" },
+      { cmd: "cv", desc: "link to the PDF résumé" },
+      { cmd: "echo <text>", desc: "echo the text (classic)" },
+      { cmd: "clear", desc: "clear the terminal" },
+    ],
+    unknown: "command not found: {cmd}",
+    tryHelp: "Type `help` to see the available commands.",
+    projectsIntro: "{n} portfolio projects — use `project <name>` for details:",
+    projectUsage: "usage: project <name> · e.g. project aurora-vm",
+    projectNotFound: "project not found: {cmd}",
+    stackLabel: "stack",
+    highlightsLabel: "highlights",
+    repoLabel: "repo",
+    languageLabel: "language",
+    contactTitle: "contact —",
+    skillsTitle: "skills —",
+    expTitle: "experience —",
+    bootFocus: ["AI", "automation", "systems"],
+    bootStack: ["Python", "TypeScript", "APIs"],
+    bootBase: "circuits → deploy",
+    sudoEgg: "permission denied: nobody has sudo here. Not even me.",
+    editorEgg: "no text editors around here — try `help`.",
+    rmEgg: "nice try. Nothing was deleted (there was nothing to delete).",
+    exitEgg: "this terminal has no exit. Just keep exploring.",
   },
 };
 
