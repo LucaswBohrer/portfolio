@@ -159,6 +159,22 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "aurora-vm",
+    repo: "LucaswBohrer/aurora-vm",
+    language: "Assembly",
+    tags: ["Assembly", "x86-64", "NASM", "VM"],
+    categories: ["systems"],
+    title: { pt: "AURORA VM", en: "AURORA VM" },
+    description: {
+      pt: "Máquina virtual de 64 bits com ISA própria: CPU virtual, bytecode, assembler e debugger implementados do zero em Assembly x86-64 (NASM, sem libc).",
+      en: "64-bit virtual machine with a custom ISA: virtual CPU, bytecode, assembler and debugger implemented from scratch in x86-64 Assembly (NASM, no libc).",
+    },
+    highlights: {
+      pt: ["43 opcodes, ISA congelada", "Binário estático sem libc", "24/24 testes verdes"],
+      en: ["43 opcodes, frozen ISA", "Static binary, no libc", "24/24 tests green"],
+    },
+  },
+  {
     slug: "travel-agent",
     repo: "LucaswBohrer/travel-intelligence-agent",
     language: "TypeScript",
