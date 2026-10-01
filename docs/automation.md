@@ -71,6 +71,36 @@ quando algo mudou, então execuções sem mudança não geram push algum.
    `python -m pytest --collect-only -q` (o número na linha
    `N tests collected` é o que vira `testCount`).
 
+## Incidente 2026-10-01 — workflow removido da master
+
+Em 01/10/2026 foi detectado que `.github/workflows/publish-test-count.yml`
+não existia mais na branch `master` do repo JARVIS (removido por um
+force-push da evolução visual). Sem o arquivo, nenhum push futuro dispara
+a atualização do contador.
+
+**Restauração** (requer credencial com escopo `workflow`):
+
+Opção A — interface web (mais simples):
+1. Em `github.com/LucaswBohrer/jarvis`, clique em **Add file → Create new file**.
+2. Nome: `.github/workflows/publish-test-count.yml`.
+3. Cole o conteúdo de referência (disponível no histórico do repo, commit
+   `a3cb7b3`, ou no arquivo `publish-test-count.yml` entregue junto a esta doc).
+4. **Commit directly to the `master` branch**.
+
+Opção B — terminal (da sua máquina):
+```bash
+cd ~/jarvis && git checkout master && git pull
+mkdir -p .github/workflows
+# (copiar o conteúdo para .github/workflows/publish-test-count.yml)
+git add .github/workflows/publish-test-count.yml
+git commit -m "ci(jarvis): restore test-count publisher workflow"
+git push origin master
+```
+
+Após restaurar, valide com **Run workflow** (workflow_dispatch) e confirme
+que a execução aparece em Actions. O próximo `push` na master então volta
+a atualizar o contador automaticamente.
+
 ## Configuração necessária (uma vez)
 
 O workflow precisa de um secret no repositório **JARVIS**
