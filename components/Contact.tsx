@@ -39,9 +39,16 @@ const icons = {
 export default function Contact() {
   const { lang, t } = useLang();
 
+  const gmailCompose = (subject?: string) =>
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}` +
+    (subject ? `&su=${encodeURIComponent(subject)}` : "");
+  const whatsappUrl =
+    `https://wa.me/${profile.phone.replace(/\D/g, "")}` +
+    `?text=${encodeURIComponent(t.contact.whatsappMessage)}`;
+
   const cards = [
-    { icon: icons.mail, label: t.contact.emailLabel, value: profile.email, href: `mailto:${profile.email}` },
-    { icon: icons.phone, label: t.contact.phoneLabel, value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, "")}` },
+    { icon: icons.mail, label: t.contact.emailLabel, value: profile.email, href: gmailCompose() },
+    { icon: icons.phone, label: t.contact.phoneLabel, value: profile.phone, href: whatsappUrl },
     { icon: icons.pin, label: t.contact.locationLabel, value: profile.location[lang], href: undefined },
     { icon: icons.github, label: t.contact.githubLabel, value: "github.com/LucaswBohrer", href: profile.github },
   ];
@@ -50,7 +57,7 @@ export default function Contact() {
     <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
       <SectionHead eyebrow={t.contact.eyebrow} title={t.contact.title} />
       <Reveal delay={100}>
-        <p className="mt-3 max-w-xl text-[15px] text-slate-500">{t.contact.subtitle}</p>
+        <p className="mt-3 max-w-xl text-[15px] text-slate-400">{t.contact.subtitle}</p>
       </Reveal>
 
       {/* intent-driven CTAs */}
@@ -62,13 +69,13 @@ export default function Contact() {
           {t.contact.intents.map((intent, i) => (
             <Reveal key={intent.label} delay={140 + i * 80}>
               <a
-                href={`mailto:${profile.email}?subject=${encodeURIComponent(intent.subject)}`}
+                href={gmailCompose(intent.subject)}
                 className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-[#0c0f16]/85 p-5 transition-all hover:-translate-y-0.5 hover:border-cyan-300/30"
               >
                 <span className="font-display text-[15px] font-semibold text-white transition-colors group-hover:text-cyan-200">
                   {intent.label}
                 </span>
-                <span className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-500">{intent.desc}</span>
+                <span className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-400">{intent.desc}</span>
                 <span className="font-display mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-cyan-300">
                   {t.contact.sendEmail}
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

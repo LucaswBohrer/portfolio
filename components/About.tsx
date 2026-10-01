@@ -45,7 +45,7 @@ export default function About() {
 
           <Reveal delay={400}>
             <Terminal title={`${t.about.neofetch.user}: ~`} className="mt-6">
-              <p className="mb-4 text-slate-500">
+              <p className="mb-4 text-slate-400">
                 <span className="text-cyan-300">$</span> neofetch
               </p>
               <div className="flex items-start gap-6">
@@ -109,7 +109,7 @@ export default function About() {
                     <span className="font-code text-[11.5px] text-slate-500">{e.period}</span>
                   </div>
                   <p className="mt-1 text-[13.5px] font-medium text-cyan-300/90">{e.school}</p>
-                  <p className="mt-1.5 text-[13px] text-slate-500">{e.note}</p>
+                  <p className="mt-1.5 text-[13px] text-slate-400">{e.note}</p>
                 </div>
               </Reveal>
             ))}

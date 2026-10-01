@@ -119,6 +119,7 @@ export interface Dict {
     cvLabel: string;
     cvHint: string;
     sendEmail: string;
+    whatsappMessage: string;
     intentsTitle: string;
     intents: { label: string; desc: string; subject: string }[];
   };
@@ -352,6 +353,7 @@ const pt: Dict = {
     cvLabel: "Baixar currículo",
     cvHint: "PDF · atualizado em 2026",
     sendEmail: "Enviar e-mail",
+    whatsappMessage: "Olá! Vim pelo seu portfólio e gostaria de conversar.",
     intentsTitle: "Como quer começar?",
     intents: [
       {
@@ -604,6 +606,7 @@ const en: Dict = {
     cvLabel: "Download résumé",
     cvHint: "PDF · updated 2026",
     sendEmail: "Send email",
+    whatsappMessage: "Hi! I came from your portfolio and would like to chat.",
     intentsTitle: "How do you want to start?",
     intents: [
       {

@@ -149,7 +149,7 @@ function JarvisTestCount() {
         <p aria-label={tc.ariaExplainer}>
           <strong className="font-semibold text-white">{jarvisTests.testCount}</strong> {tc.validated}
         </p>
-        <p className="mt-1 text-[13px] text-slate-500">
+        <p className="mt-1 text-[13px] text-slate-400">
           {tc.lastVerified}: {dateStr}
           {jarvisTests.workflowRun ? (
             <>
@@ -228,7 +228,7 @@ function CaseCard({ p, index }: { p: Project; index: number }) {
 
             <ul className="mt-4 space-y-1.5">
               {p.highlights[lang].map((h) => (
-                <li key={h} className="flex items-center gap-2 text-[13px] text-slate-500">
+                <li key={h} className="flex items-center gap-2 text-[13px] text-slate-400">
                   <span className="h-1 w-1 rounded-full bg-cyan-300/70" aria-hidden="true" />
                   {h}
                 </li>
@@ -419,7 +419,7 @@ export default function Projects() {
       <SectionHead eyebrow={t.projects.eyebrow} title={t.projects.title} />
       <div ref={revealRef}>
         <Reveal delay={100}>
-          <p className="mt-3 max-w-2xl text-[15px] text-slate-500">{t.projects.subtitle}</p>
+          <p className="mt-3 max-w-2xl text-[15px] text-slate-400">{t.projects.subtitle}</p>
         </Reveal>
 
         <Reveal delay={180}>
@@ -436,7 +436,7 @@ export default function Projects() {
 
         <div className="reveal mt-14">
           <h2 className="font-display text-2xl font-bold tracking-tight text-white">{t.projects.moreTitle}</h2>
-          <p className="mt-2 text-[14px] text-slate-500">{t.projects.moreSubtitle}</p>
+          <p className="mt-2 text-[14px] text-slate-400">{t.projects.moreSubtitle}</p>
 
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label={t.projects.moreTitle}>
             {FILTERS.map((f) => (

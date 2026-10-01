@@ -11,7 +11,7 @@ export default function Experience() {
     <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
       <SectionHead eyebrow={t.experience.eyebrow} title={t.experience.title} />
       <Reveal delay={100}>
-        <p className="mt-3 text-[15px] text-slate-500">{t.experience.subtitle}</p>
+        <p className="mt-3 text-[15px] text-slate-400">{t.experience.subtitle}</p>
       </Reveal>
 
       <div className="relative mt-12 space-y-8 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-gradient-to-b before:from-cyan-300/50 before:via-white/10 before:to-transparent">
