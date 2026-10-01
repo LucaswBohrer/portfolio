@@ -11,6 +11,9 @@ export interface Project {
   caseKey?: "nexus" | "jarvis";
   /** public path to case media (real screenshot), if any */
   mediaSrc?: string;
+  /** intrinsic dimensions of the case media (prevents layout shift) */
+  mediaWidth?: number;
+  mediaHeight?: number;
   title: { pt: string; en: string };
   description: { pt: string; en: string };
   highlights: { pt: string[]; en: string[] };
@@ -25,6 +28,9 @@ export const projects: Project[] = [
     tags: ["Python", "FastAPI", "Telemetria", "IA"],
     categories: ["ai", "automation", "web"],
     caseKey: "nexus",
+    mediaSrc: "/cases/nexus-dashboard.png",
+    mediaWidth: 1573,
+    mediaHeight: 754,
     title: { pt: "NEXUS", en: "NEXUS" },
     description: {
       pt: "Plataforma de inteligência elétrica: monitoramento, simulação full-stack, diagnósticos e telemetria em tempo real de sistemas elétricos.",
@@ -44,6 +50,8 @@ export const projects: Project[] = [
     categories: ["ai", "automation"],
     caseKey: "jarvis",
     mediaSrc: "/cases/jarvis-ui.png",
+    mediaWidth: 1200,
+    mediaHeight: 750,
     title: { pt: "JARVIS", en: "JARVIS" },
     description: {
       pt: "Plataforma pessoal de IA local-first: orquestração de tarefas, memória tipada, política de permissões e integração com o NEXUS via API.",

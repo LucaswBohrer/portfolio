@@ -18,6 +18,9 @@ export interface CaseStudyDict {
   status: string;
   stack: string[];
   mediaAlt: string;
+  /** optional product gallery (real screenshots); captions are localized */
+  gallery?: { src: string; width: number; height: number; alt: string; caption: string }[];
+  galleryDiagramCaption?: string;
 }
 
 export interface Dict {
@@ -82,6 +85,14 @@ export interface Dict {
       status: string;
       stack: string;
       links: string;
+    };
+    galleryTitle: string;
+    testCount: {
+      validated: string;
+      lastVerified: string;
+      fallback: string;
+      viewRun: string;
+      ariaExplainer: string;
     };
   };
   caseStudies: {
@@ -231,6 +242,15 @@ const pt: Dict = {
       stack: "Stack",
       links: "Links",
     },
+    galleryTitle: "Galeria do produto",
+    testCount: {
+      validated: "testes automatizados validados",
+      lastVerified: "Última validação",
+      fallback: "Suíte de testes verificada no CI",
+      viewRun: "ver execução no CI",
+      ariaExplainer:
+        "Número de testes coletados automaticamente pelo pytest na última execução bem-sucedida do CI",
+    },
   },
   caseStudies: {
     nexus: {
@@ -246,10 +266,27 @@ const pt: Dict = {
       challenge:
         "Manter dados de telemetria consistentes e em tempo real entre simulação, API e interface — sem valores falsos no dashboard.",
       result:
-        "Plataforma funcional, evoluída de dashboard a sistema de inteligência elétrica em múltiplas fases. [ADICIONAR MÉTRICA REAL]",
+        "Plataforma funcional com fluxo completo de simulação, API, dashboards e diagnósticos, evoluída em múltiplas fases.",
       status: "Em desenvolvimento ativo",
       stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetria"],
-      mediaAlt: "Diagrama da arquitetura do NEXUS",
+      mediaAlt: "Dashboard do NEXUS exibindo telemetria elétrica em tempo real",
+      gallery: [
+        {
+          src: "/cases/nexus-monitor.png",
+          width: 1591,
+          height: 650,
+          alt: "Monitor do NEXUS com telemetria em tempo real e gráfico de potência ativa recente",
+          caption: "Monitor — telemetria em tempo real via SSE",
+        },
+        {
+          src: "/cases/nexus-equipamentos.png",
+          width: 1592,
+          height: 681,
+          alt: "Tela de equipamentos do NEXUS com gestão multi-equipment e última leitura por equipamento",
+          caption: "Equipamentos — gestão multi-equipment (fase 2.4)",
+        },
+      ],
+      galleryDiagramCaption: "Arquitetura — simulação → API → dashboards",
     },
     jarvis: {
       name: "JARVIS",
@@ -264,7 +301,7 @@ const pt: Dict = {
       challenge:
         "Garantir que a automação nunca execute nada sem permissão explícita — política e auditoria antes de qualquer escrita.",
       result:
-        "Fases 1–3 implementadas e validadas: 377 testes automatizados, pipeline vertical completo funcionando com dados reais. [ADICIONAR MÉTRICA REAL]",
+        "Fases 1–3 implementadas e validadas — pipeline vertical completo funcionando com dados reais.",
       status: "Em evolução — fases 1–3 concluídas",
       stack: ["Python", "Pydantic", "SQLite", "FastAPI", "Vanilla JS"],
       mediaAlt: "Interface do JARVIS — centro de comando com orbe de status",
@@ -455,6 +492,15 @@ const en: Dict = {
       stack: "Stack",
       links: "Links",
     },
+    galleryTitle: "Product gallery",
+    testCount: {
+      validated: "automated tests validated",
+      lastVerified: "Last verified",
+      fallback: "Test suite verified in CI",
+      viewRun: "view CI run",
+      ariaExplainer:
+        "Number of tests collected automatically by pytest in the last successful CI run",
+    },
   },
   caseStudies: {
     nexus: {
@@ -470,10 +516,27 @@ const en: Dict = {
       challenge:
         "Keeping telemetry data consistent and real-time across simulation, API and UI — with no fake dashboard values.",
       result:
-        "Working platform, evolved from dashboard to electrical intelligence system across multiple phases. [ADD REAL METRIC]",
+        "Working platform with a complete simulation, API, dashboard and diagnostics flow, evolved across multiple phases.",
       status: "In active development",
       stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetry"],
-      mediaAlt: "NEXUS architecture diagram",
+      mediaAlt: "NEXUS dashboard showing real-time electrical telemetry",
+      gallery: [
+        {
+          src: "/cases/nexus-monitor.png",
+          width: 1591,
+          height: 650,
+          alt: "NEXUS monitor with real-time telemetry and recent active power chart",
+          caption: "Monitor — real-time telemetry over SSE",
+        },
+        {
+          src: "/cases/nexus-equipamentos.png",
+          width: 1592,
+          height: 681,
+          alt: "NEXUS equipment screen with multi-equipment management and last reading per equipment",
+          caption: "Equipment — multi-equipment management (phase 2.4)",
+        },
+      ],
+      galleryDiagramCaption: "Architecture — simulation → API → dashboards",
     },
     jarvis: {
       name: "JARVIS",
@@ -488,7 +551,7 @@ const en: Dict = {
       challenge:
         "Making sure automation never executes anything without explicit permission — policy and audit before any write.",
       result:
-        "Phases 1–3 implemented and validated: 377 automated tests, full vertical pipeline working with real data. [ADD REAL METRIC]",
+        "Phases 1–3 implemented and validated — full vertical pipeline working with real data.",
       status: "Evolving — phases 1–3 complete",
       stack: ["Python", "Pydantic", "SQLite", "FastAPI", "Vanilla JS"],
       mediaAlt: "JARVIS interface — command center with status orb",

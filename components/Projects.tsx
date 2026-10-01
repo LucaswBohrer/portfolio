@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang, type CaseStudyDict } from "@/lib/i18n";
 import { projects, repoUrl, type Category, type Project } from "@/lib/projects";
+import { jarvisTests } from "@/lib/jarvis-tests";
 import { useSpotlight, useReveal } from "@/lib/hooks";
 import Reveal from "./Reveal";
 import { SectionHead } from "./About";
@@ -104,6 +105,56 @@ function NexusDiagram() {
   );
 }
 
+function JarvisTestCount() {
+  const { lang, t } = useLang();
+  const tc = t.projects.testCount;
+  const labelCls = "font-code mb-1.5 text-[11px] tracking-[0.2em] text-cyan-300/80 uppercase";
+  const bodyCls = "text-[14px] leading-relaxed text-slate-300";
+
+  if (!jarvisTests) {
+    return (
+      <div>
+        <dt className={labelCls}>{t.projects.caseLabels.result}</dt>
+        <dd className={bodyCls}>{tc.fallback}</dd>
+      </div>
+    );
+  }
+
+  const dateStr = new Intl.DateTimeFormat(lang === "pt" ? "pt-BR" : "en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(jarvisTests.verifiedAt));
+
+  return (
+    <div>
+      <dt className={labelCls}>{t.projects.caseLabels.result}</dt>
+      <dd className={bodyCls}>
+        <p aria-label={tc.ariaExplainer}>
+          <strong className="font-semibold text-white">{jarvisTests.testCount}</strong> {tc.validated}
+        </p>
+        <p className="mt-1 text-[13px] text-slate-500">
+          {tc.lastVerified}: {dateStr}
+          {jarvisTests.workflowRun ? (
+            <>
+              {" · "}
+              <a
+                href={jarvisTests.workflowRun}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300/90 underline decoration-cyan-300/30 underline-offset-2 transition-colors hover:text-cyan-200"
+              >
+                {tc.viewRun}
+              </a>
+            </>
+          ) : null}
+        </p>
+      </dd>
+    </div>
+  );
+}
+
 function CaseField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
@@ -130,6 +181,8 @@ function CaseCard({ p, index }: { p: Project; index: number }) {
               <img
                 src={p.mediaSrc}
                 alt={cs.mediaAlt}
+                width={p.mediaWidth ?? 1200}
+                height={p.mediaHeight ?? 750}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
@@ -216,8 +269,46 @@ function CaseCard({ p, index }: { p: Project; index: number }) {
               <CaseField label={t.projects.caseLabels.role}>{cs.role}</CaseField>
               <CaseField label={t.projects.caseLabels.architecture}>{cs.architecture}</CaseField>
               <CaseField label={t.projects.caseLabels.challenge}>{cs.challenge}</CaseField>
-              <CaseField label={t.projects.caseLabels.result}>{cs.result}</CaseField>
+              {p.caseKey === "jarvis" ? (
+                <JarvisTestCount />
+              ) : (
+                <CaseField label={t.projects.caseLabels.result}>{cs.result}</CaseField>
+              )}
             </dl>
+            {cs.gallery && cs.gallery.length > 0 && (
+              <div className="mt-6 border-t border-white/[0.07] pt-5">
+                <h4 className="font-code mb-3 text-[11px] tracking-[0.2em] text-cyan-300/80 uppercase">
+                  {t.projects.galleryTitle}
+                </h4>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {cs.gallery.map((g) => (
+                    <figure key={g.src} className="hairline overflow-hidden rounded-xl bg-[#07090d]">
+                      <img
+                        src={g.src}
+                        alt={g.alt}
+                        width={g.width}
+                        height={g.height}
+                        loading="lazy"
+                        className="h-auto w-full"
+                      />
+                      <figcaption className="font-code px-3 py-2 text-[11px] text-slate-500">
+                        {g.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                  <figure className="hairline overflow-hidden rounded-xl bg-[#07090d] sm:col-span-2">
+                    <div className="p-4 sm:p-5">
+                      <NexusDiagram />
+                    </div>
+                    {cs.galleryDiagramCaption && (
+                      <figcaption className="font-code px-3 py-2 text-[11px] text-slate-500">
+                        {cs.galleryDiagramCaption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </div>
+              </div>
+            )}
             <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-white/[0.07] pt-5">
               <span className="font-code mr-1 text-[11px] tracking-[0.2em] text-slate-500 uppercase">
                 {t.projects.caseLabels.stack}:
