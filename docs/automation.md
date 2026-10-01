@@ -132,7 +132,8 @@ Workflow `.github/workflows/repo-watch.yml` que roda toda **segunda-feira às 09
 1. Lista os repositórios públicos de `LucaswBohrer` via GitHub API.
 2. Extrai os repos já curados de `lib/projects.ts` (padrão `repo: "LucaswBohrer/<nome>"`).
 3. Ignora permanentemente: `LucaswBohrer` (repo do perfil README), `portfolio`
-   (o próprio site), forks, arquivados e repos vazios.
+   (o próprio site), `Eletronica-Digital` (decisão do Lucas, 2026-10-01),
+   forks, arquivados e repos vazios.
 4. Se houver repos novos, cria ou atualiza uma issue com label `repo-watch`
    contendo os metadados reais da API (nome, URL, descrição, linguagem,
    datas de criação/push) — nunca inventa título, descrição ou highlights.
