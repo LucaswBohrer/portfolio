@@ -38,6 +38,13 @@ body {
 ::-webkit-scrollbar-thumb { background: #1d2330; border-radius: 8px; border: 2px solid #0a0c11; }
 ::-webkit-scrollbar-thumb:hover { background: #2a3348; }
 
+/* ---------- focus visibility (a11y) ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* ---------- keyframes ---------- */
 @keyframes aurora-a {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -140,6 +147,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
   .shiny-text { animation: none; }
   .reveal { opacity: 1; }
   .tab-panel { animation: none; }

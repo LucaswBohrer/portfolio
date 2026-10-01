@@ -37,6 +37,7 @@ export default function Header({ tab, onTab }: HeaderProps) {
             <button
               key={id}
               onClick={() => onTab(id)}
+              aria-current={tab === id ? "page" : undefined}
               className={`relative rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors sm:px-4 ${
                 tab === id ? "text-[#07090d]" : "text-slate-400 hover:text-white"
               }`}

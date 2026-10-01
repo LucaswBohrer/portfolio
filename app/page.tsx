@@ -4,10 +4,12 @@ import { useCallback, useState } from "react";
 import Aurora from "@/components/Aurora";
 import Header, { type TabId } from "@/components/Header";
 import Hero from "@/components/Hero";
+import Services from "@/components/Services";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [tab, setTab] = useState<TabId>("home");
@@ -25,6 +27,7 @@ export default function Home() {
         {tab === "home" && (
           <div key="home" className="tab-panel">
             <Hero onTab={handleTab} />
+            <Services />
           </div>
         )}
         {tab === "about" && (
@@ -48,6 +51,7 @@ export default function Home() {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 }

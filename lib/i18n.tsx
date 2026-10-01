@@ -6,6 +6,20 @@ export type Lang = "pt" | "en";
 
 const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: Dict } | null>(null);
 
+export interface CaseStudyDict {
+  name: string;
+  tagline: string;
+  problem: string;
+  solution: string;
+  role: string;
+  architecture: string;
+  challenge: string;
+  result: string;
+  status: string;
+  stack: string[];
+  mediaAlt: string;
+}
+
 export interface Dict {
   nav: { home: string; about: string; projects: string; experience: string; contact: string };
   hero: {
@@ -17,6 +31,10 @@ export interface Dict {
     stats: { label1: string; label2: string; label3: string };
     terminalTitle: string;
     available: string;
+    servicesEyebrow: string;
+    servicesTitle: string;
+    servicesSubtitle: string;
+    services: { title: string; desc: string; tags: string[] }[];
   };
   about: {
     eyebrow: string;
@@ -46,9 +64,29 @@ export interface Dict {
     title: string;
     subtitle: string;
     viewRepo: string;
+    viewCase: string;
+    hideCase: string;
     privateRepo: string;
     featured: string;
     updated: string;
+    filters: { all: string; ai: string; automation: string; web: string; embedded: string };
+    moreTitle: string;
+    moreSubtitle: string;
+    caseLabels: {
+      problem: string;
+      solution: string;
+      role: string;
+      architecture: string;
+      challenge: string;
+      result: string;
+      status: string;
+      stack: string;
+      links: string;
+    };
+  };
+  caseStudies: {
+    nexus: CaseStudyDict;
+    jarvis: CaseStudyDict;
   };
   experience: {
     eyebrow: string;
@@ -67,22 +105,45 @@ export interface Dict {
     cvLabel: string;
     cvHint: string;
     sendEmail: string;
+    intentsTitle: string;
+    intents: { label: string; desc: string; subject: string }[];
   };
-  footer: { rights: string; builtWith: string };
+  footer: { rights: string; builtWith: string; tagline: string };
 }
 
 const pt: Dict = {
   nav: { home: "Início", about: "Sobre", projects: "Projetos", experience: "Experiência", contact: "Contato" },
   hero: {
     eyebrow: "Portfólio · 2026",
-    role: "AI & Technology Engineer",
+    role: "Estudante de Engenharia de IA · Automação & Sistemas Embarcados",
     intro:
-      "Estudante de Inteligência Artificial (FIAP) e Engenharia Elétrica (Feevale) que aprende construindo: agentes de IA, automação, sistemas embarcados e plataformas full-stack. Do circuito ao deploy.",
+      "Construo agentes de IA, automações e sistemas embarcados — do circuito ao deploy.",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
     stats: { label1: "repositórios públicos", label2: "anos em eletrônica", label3: "graduações em curso" },
     terminalTitle: "perfil.ts",
     available: "Disponível para projetos e estágios",
+    servicesEyebrow: "Como posso ajudar",
+    servicesTitle: "Três formas de gerar valor.",
+    servicesSubtitle:
+      "Sou estudante — e é exatamente por isso que entrego com seriedade: escopo claro, comunicação direta e código que funciona.",
+    services: [
+      {
+        title: "Agentes e automação com IA",
+        desc: "Assistentes, agentes e fluxos automatizados que resolvem tarefas reais: atendimento, triagem, integração com APIs e ferramentas do dia a dia.",
+        tags: ["Agentes de IA", "Automações", "Integrações"],
+      },
+      {
+        title: "APIs e plataformas full-stack",
+        desc: "Back-ends em Python, integrações e dashboards web: do modelo de dados à interface, com foco em clareza e manutenção.",
+        tags: ["Python", "REST APIs", "Dashboards"],
+      },
+      {
+        title: "Protótipos embarcados e IoT",
+        desc: "Do esquemático ao firmware: ESP32, sensores e telemetria conectados a software — eletrônica que conversa com a nuvem.",
+        tags: ["ESP32", "Sensores", "Telemetria"],
+      },
+    ],
   },
   about: {
     eyebrow: "Sobre",
@@ -149,11 +210,65 @@ const pt: Dict = {
   projects: {
     eyebrow: "Projetos",
     title: "Trabalho selecionado.",
-    subtitle: "Uma curadoria dos meus repositórios públicos no GitHub — sistemas reais, não demos de mentira.",
+    subtitle: "Dois cases em profundidade e uma seleção de repositórios — sistemas reais, não demos de mentira.",
     viewRepo: "Ver repositório",
+    viewCase: "Ver case",
+    hideCase: "Ocultar case",
     privateRepo: "Repositório privado",
     featured: "Destaque",
     updated: "atualizado em",
+    filters: { all: "Todos", ai: "IA", automation: "Automação", web: "Web", embedded: "Embarcados" },
+    moreTitle: "Mais repositórios",
+    moreSubtitle: "Projetos complementares — filtre por área de interesse.",
+    caseLabels: {
+      problem: "Problema",
+      solution: "Solução",
+      role: "Meu papel",
+      architecture: "Arquitetura",
+      challenge: "Desafio técnico",
+      result: "Resultado",
+      status: "Status",
+      stack: "Stack",
+      links: "Links",
+    },
+  },
+  caseStudies: {
+    nexus: {
+      name: "NEXUS",
+      tagline: "Plataforma de inteligência elétrica — do monitoramento ao diagnóstico.",
+      problem:
+        "Monitorar sistemas elétricos em tempo real exige unir telemetria, diagnóstico e visualização em uma plataforma confiável — sem depender de soluções caras e fechadas.",
+      solution:
+        "Plataforma full-stack de inteligência elétrica: coleta e simulação de telemetria, diagnósticos e dashboards em tempo real, com API HTTP versionada.",
+      role: "Autor e desenvolvedor único — arquitetura, back-end, front-end e simulação de telemetria.",
+      architecture:
+        "Back-end em Python (FastAPI) com API versionada · simulação de telemetria · front-end web com dashboards em tempo real.",
+      challenge:
+        "Manter dados de telemetria consistentes e em tempo real entre simulação, API e interface — sem valores falsos no dashboard.",
+      result:
+        "Plataforma funcional, evoluída de dashboard a sistema de inteligência elétrica em múltiplas fases. [ADICIONAR MÉTRICA REAL]",
+      status: "Em desenvolvimento ativo",
+      stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetria"],
+      mediaAlt: "Diagrama da arquitetura do NEXUS",
+    },
+    jarvis: {
+      name: "JARVIS",
+      tagline: "Plataforma pessoal de IA — orquestração com memória e permissões explícitas.",
+      problem:
+        "Ferramentas de IA genéricas não conhecem meu contexto: projetos, decisões e rotina. Eu queria um sistema pessoal que orquestrasse tarefas com memória e permissões explícitas.",
+      solution:
+        "Plataforma pessoal de IA local-first: máquina de estados de tarefas, memória tipada, política de permissões deny-by-default e integração com o NEXUS via API.",
+      role: "Autor — arquitetura, contratos, engine de orquestração, política de segurança e interface web.",
+      architecture:
+        "Core em Python (Pydantic, SQLite + FTS5, Alembic) · pipeline ToolRequest → Policy → Executor → Verifier → AuditLog · adaptador HTTP para o NEXUS · shell web em arquivo único.",
+      challenge:
+        "Garantir que a automação nunca execute nada sem permissão explícita — política e auditoria antes de qualquer escrita.",
+      result:
+        "Fases 1–3 implementadas e validadas: 377 testes automatizados, pipeline vertical completo funcionando com dados reais. [ADICIONAR MÉTRICA REAL]",
+      status: "Em evolução — fases 1–3 concluídas",
+      stack: ["Python", "Pydantic", "SQLite", "FastAPI", "Vanilla JS"],
+      mediaAlt: "Interface do JARVIS — centro de comando com orbe de status",
+    },
   },
   experience: {
     eyebrow: "Experiência",
@@ -187,7 +302,7 @@ const pt: Dict = {
   contact: {
     eyebrow: "Contato",
     title: "Vamos construir algo juntos?",
-    subtitle: "Estou aberto a estágios, projetos freelance e colaborações em IA, automação e engenharia.",
+    subtitle: "Escolha o assunto e me chame — respondo com escopo e próximos passos, não com enrolação.",
     emailLabel: "E-mail",
     phoneLabel: "Telefone",
     locationLabel: "Localização",
@@ -195,22 +310,64 @@ const pt: Dict = {
     cvLabel: "Baixar currículo",
     cvHint: "PDF · atualizado em 2026",
     sendEmail: "Enviar e-mail",
+    intentsTitle: "Como quer começar?",
+    intents: [
+      {
+        label: "Quero conversar sobre um projeto",
+        desc: "Ideia, automação ou protótipo — me conte o problema que quer resolver.",
+        subject: "Projeto — quero conversar sobre uma ideia",
+      },
+      {
+        label: "Ver disponibilidade para estágio",
+        desc: "Estágio ou posição júnior em IA, automação, software ou engenharia.",
+        subject: "Estágio — disponibilidade",
+      },
+      {
+        label: "Falar sobre IA e automação",
+        desc: "Dúvidas, colaborações ou parcerias em IA aplicada e automação.",
+        subject: "IA e automação — contato",
+      },
+    ],
   },
-  footer: { rights: "Todos os direitos reservados.", builtWith: "Construído com Next.js, React e Tailwind CSS." },
+  footer: {
+    rights: "Todos os direitos reservados.",
+    builtWith: "Construído com Next.js, React e Tailwind CSS.",
+    tagline: "Do circuito ao deploy.",
+  },
 };
 
 const en: Dict = {
   nav: { home: "Home", about: "About", projects: "Projects", experience: "Experience", contact: "Contact" },
   hero: {
     eyebrow: "Portfolio · 2026",
-    role: "AI & Technology Engineer",
-    intro:
-      "AI Technology (FIAP) and Electrical Engineering (Feevale) student who learns by building: AI agents, automation, embedded systems and full-stack platforms. From circuit to deploy.",
+    role: "AI Engineering Student · Automation & Embedded Systems",
+    intro: "I build AI agents, automations, and embedded systems — from circuit to deploy.",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
     stats: { label1: "public repositories", label2: "years in electronics", label3: "degrees in progress" },
     terminalTitle: "profile.ts",
     available: "Open to projects and internships",
+    servicesEyebrow: "How I can help",
+    servicesTitle: "Three ways to create value.",
+    servicesSubtitle:
+      "I'm a student — and that's exactly why I deliver seriously: clear scope, direct communication, and code that works.",
+    services: [
+      {
+        title: "AI agents & automation",
+        desc: "Assistants, agents and automated workflows that solve real tasks: support, triage, API integrations and everyday tooling.",
+        tags: ["AI Agents", "Automations", "Integrations"],
+      },
+      {
+        title: "APIs & full-stack platforms",
+        desc: "Python back-ends, integrations and web dashboards: from data model to interface, built for clarity and maintenance.",
+        tags: ["Python", "REST APIs", "Dashboards"],
+      },
+      {
+        title: "Embedded & IoT prototypes",
+        desc: "From schematic to firmware: ESP32, sensors and telemetry wired to software — electronics that talk to the cloud.",
+        tags: ["ESP32", "Sensors", "Telemetry"],
+      },
+    ],
   },
   about: {
     eyebrow: "About",
@@ -277,11 +434,65 @@ const en: Dict = {
   projects: {
     eyebrow: "Projects",
     title: "Selected work.",
-    subtitle: "A curated view of my public GitHub repositories — real systems, not fake demos.",
+    subtitle: "Two in-depth cases plus a curated set of repositories — real systems, not fake demos.",
     viewRepo: "View repository",
+    viewCase: "View case",
+    hideCase: "Hide case",
     privateRepo: "Private repository",
     featured: "Featured",
     updated: "updated",
+    filters: { all: "All", ai: "AI", automation: "Automation", web: "Web", embedded: "Embedded" },
+    moreTitle: "More repositories",
+    moreSubtitle: "Complementary projects — filter by area of interest.",
+    caseLabels: {
+      problem: "Problem",
+      solution: "Solution",
+      role: "My role",
+      architecture: "Architecture",
+      challenge: "Technical challenge",
+      result: "Result",
+      status: "Status",
+      stack: "Stack",
+      links: "Links",
+    },
+  },
+  caseStudies: {
+    nexus: {
+      name: "NEXUS",
+      tagline: "Electrical intelligence platform — from monitoring to diagnostics.",
+      problem:
+        "Monitoring electrical systems in real time means joining telemetry, diagnostics and visualization in one trustworthy platform — without depending on expensive, closed solutions.",
+      solution:
+        "Full-stack electrical intelligence platform: telemetry collection and simulation, diagnostics and real-time dashboards, with a versioned HTTP API.",
+      role: "Sole author and developer — architecture, back-end, front-end and telemetry simulation.",
+      architecture:
+        "Python back-end (FastAPI) with versioned API · telemetry simulation · web front-end with real-time dashboards.",
+      challenge:
+        "Keeping telemetry data consistent and real-time across simulation, API and UI — with no fake dashboard values.",
+      result:
+        "Working platform, evolved from dashboard to electrical intelligence system across multiple phases. [ADD REAL METRIC]",
+      status: "In active development",
+      stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetry"],
+      mediaAlt: "NEXUS architecture diagram",
+    },
+    jarvis: {
+      name: "JARVIS",
+      tagline: "Personal AI platform — orchestration with memory and explicit permissions.",
+      problem:
+        "Generic AI tools don't know my context: projects, decisions and daily routine. I wanted a personal system to orchestrate tasks with memory and explicit permissions.",
+      solution:
+        "Local-first personal AI platform: task state machine, typed memory, deny-by-default permission policy and NEXUS integration via API.",
+      role: "Author — architecture, contracts, orchestration engine, security policy and web interface.",
+      architecture:
+        "Python core (Pydantic, SQLite + FTS5, Alembic) · ToolRequest → Policy → Executor → Verifier → AuditLog pipeline · HTTP adapter for NEXUS · single-file web shell.",
+      challenge:
+        "Making sure automation never executes anything without explicit permission — policy and audit before any write.",
+      result:
+        "Phases 1–3 implemented and validated: 377 automated tests, full vertical pipeline working with real data. [ADD REAL METRIC]",
+      status: "Evolving — phases 1–3 complete",
+      stack: ["Python", "Pydantic", "SQLite", "FastAPI", "Vanilla JS"],
+      mediaAlt: "JARVIS interface — command center with status orb",
+    },
   },
   experience: {
     eyebrow: "Experience",
@@ -315,7 +526,7 @@ const en: Dict = {
   contact: {
     eyebrow: "Contact",
     title: "Let's build something together?",
-    subtitle: "I'm open to internships, freelance projects and collaborations in AI, automation and engineering.",
+    subtitle: "Pick a subject and reach out — I reply with scope and next steps, not fluff.",
     emailLabel: "Email",
     phoneLabel: "Phone",
     locationLabel: "Location",
@@ -323,8 +534,30 @@ const en: Dict = {
     cvLabel: "Download résumé",
     cvHint: "PDF · updated 2026",
     sendEmail: "Send email",
+    intentsTitle: "How do you want to start?",
+    intents: [
+      {
+        label: "Talk about a project",
+        desc: "An idea, automation or prototype — tell me the problem you want to solve.",
+        subject: "Project — let's talk about an idea",
+      },
+      {
+        label: "Check internship availability",
+        desc: "Internship or junior role in AI, automation, software or engineering.",
+        subject: "Internship — availability",
+      },
+      {
+        label: "Talk AI & automation",
+        desc: "Questions, collaborations or partnerships in applied AI and automation.",
+        subject: "AI & automation — contact",
+      },
+    ],
   },
-  footer: { rights: "All rights reserved.", builtWith: "Built with Next.js, React and Tailwind CSS." },
+  footer: {
+    rights: "All rights reserved.",
+    builtWith: "Built with Next.js, React and Tailwind CSS.",
+    tagline: "From circuit to deploy.",
+  },
 };
 
 export const dictionaries: Record<Lang, Dict> = { pt, en };

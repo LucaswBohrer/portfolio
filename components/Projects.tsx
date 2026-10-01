@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useLang } from "@/lib/i18n";
-import { projects, type Project } from "@/lib/projects";
+import { useEffect, useRef, useState } from "react";
+import { useLang, type CaseStudyDict } from "@/lib/i18n";
+import { projects, repoUrl, type Category, type Project } from "@/lib/projects";
+import { useSpotlight, useReveal } from "@/lib/hooks";
 import Reveal from "./Reveal";
 import { SectionHead } from "./About";
 import Terminal from "./Terminal";
@@ -84,113 +85,266 @@ function RepoListTerminal() {
   );
 }
 
-function useSpotlight() {
-  return useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  }, []);
+function NexusDiagram() {
+  return (
+    <Terminal title="arquitetura — nexus">
+      <pre className="overflow-x-auto text-[11px] leading-relaxed text-slate-300 sm:text-[12px]">
+{`  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+  │  Telemetria  │─────▶│   FastAPI    │─────▶│  Dashboards  │
+  │ (simulação)  │ dados│   API v1     │ JSON │  tempo real  │
+  └──────────────┘      └──────┬───────┘      └──────────────┘
+                              │ SQLite
+                              ▼
+                       ┌──────────────┐
+                       │ Diagnósticos │
+                       │   + séries   │
+                       └──────────────┘`}
+      </pre>
+    </Terminal>
+  );
 }
 
-function ProjectCard({ p, index }: { p: Project; index: number }) {
+function CaseField({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <dt className="font-code mb-1.5 text-[11px] tracking-[0.2em] text-cyan-300/80 uppercase">{label}</dt>
+      <dd className="text-[14px] leading-relaxed text-slate-300">{children}</dd>
+    </div>
+  );
+}
+
+function CaseCard({ p, index }: { p: Project; index: number }) {
   const { lang, t } = useLang();
-  const onMove = useSpotlight();
+  const cs: CaseStudyDict = t.caseStudies[p.caseKey as "nexus" | "jarvis"];
+  const [open, setOpen] = useState(false);
+  const url = repoUrl(p);
+  const panelId = `case-${p.slug}`;
 
   return (
-    <Reveal delay={(index % 3) * 90}>
-      <div
-        onMouseMove={onMove}
-        className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-[#0c0f16]/85 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/25"
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <span className="font-code rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] text-slate-300">
-            {p.language}
-          </span>
-          {p.featured && (
-            <span className="chip rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2.5 py-1 text-cyan-300">
+    <Reveal delay={index * 90}>
+      <article className="spotlight-card hairline overflow-hidden rounded-2xl bg-[#0c0f16]/85">
+        <div className="grid md:grid-cols-2">
+          {/* media */}
+          <div className="relative min-h-[220px] border-b border-white/[0.07] md:border-r md:border-b-0">
+            {p.mediaSrc ? (
+              <img
+                src={p.mediaSrc}
+                alt={cs.mediaAlt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center p-5">
+                <NexusDiagram />
+              </div>
+            )}
+            <span className="chip absolute top-4 left-4 rounded-full border border-cyan-300/30 bg-[#07090d]/85 px-2.5 py-1 text-cyan-300 backdrop-blur">
               {t.projects.featured}
             </span>
-          )}
+          </div>
+
+          {/* summary */}
+          <div className="flex flex-col p-6 sm:p-7">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <span className="font-code rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] text-slate-300">
+                {p.language}
+              </span>
+              <span className="font-code inline-flex items-center gap-1.5 rounded-md border border-emerald-300/20 bg-emerald-400/[0.07] px-2 py-1 text-[11px] text-emerald-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" aria-hidden="true" />
+                {cs.status}
+              </span>
+            </div>
+            <h3 className="font-display text-2xl font-bold tracking-tight text-white">{cs.name}</h3>
+            <p className="font-display mt-1 text-[14px] text-cyan-200/90">{cs.tagline}</p>
+            <p className="mt-3 flex-1 text-[14px] leading-relaxed text-slate-400">{p.description[lang]}</p>
+
+            <ul className="mt-4 space-y-1.5">
+              {p.highlights[lang].map((h) => (
+                <li key={h} className="flex items-center gap-2 text-[13px] text-slate-500">
+                  <span className="h-1 w-1 rounded-full bg-cyan-300/70" aria-hidden="true" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.07] pt-5">
+              <button
+                onClick={() => setOpen((v) => !v)}
+                aria-expanded={open}
+                aria-controls={panelId}
+                className="font-display inline-flex items-center gap-2 rounded-full bg-cyan-300 px-5 py-2.5 text-[14px] font-semibold text-[#07090d] transition-colors hover:bg-cyan-200"
+              >
+                {open ? t.projects.hideCase : t.projects.viewCase}
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              {url && (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-display inline-flex items-center gap-2 rounded-full border border-white/12 px-5 py-2.5 text-[14px] font-semibold text-slate-200 transition-colors hover:border-cyan-300/40 hover:text-cyan-200"
+                >
+                  {t.projects.viewRepo}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
         </div>
 
-        <h3 className="font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-cyan-200">
-          {p.title[lang]}
-        </h3>
-        <p className="mt-2.5 flex-1 text-[14px] leading-relaxed text-slate-400">{p.description[lang]}</p>
+        {/* expandable case study */}
+        {open && (
+          <div id={panelId} className="border-t border-white/[0.07] bg-white/[0.015] px-6 py-7 sm:px-8">
+            <dl className="grid gap-6 sm:grid-cols-2">
+              <CaseField label={t.projects.caseLabels.problem}>{cs.problem}</CaseField>
+              <CaseField label={t.projects.caseLabels.solution}>{cs.solution}</CaseField>
+              <CaseField label={t.projects.caseLabels.role}>{cs.role}</CaseField>
+              <CaseField label={t.projects.caseLabels.architecture}>{cs.architecture}</CaseField>
+              <CaseField label={t.projects.caseLabels.challenge}>{cs.challenge}</CaseField>
+              <CaseField label={t.projects.caseLabels.result}>{cs.result}</CaseField>
+            </dl>
+            <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-white/[0.07] pt-5">
+              <span className="font-code mr-1 text-[11px] tracking-[0.2em] text-slate-500 uppercase">
+                {t.projects.caseLabels.stack}:
+              </span>
+              {cs.stack.map((s) => (
+                <span key={s} className="font-code rounded bg-white/[0.05] px-2 py-1 text-[11.5px] text-slate-400">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </article>
+    </Reveal>
+  );
+}
 
-        <ul className="mt-4 space-y-1.5">
-          {p.highlights[lang].map((h) => (
-            <li key={h} className="flex items-center gap-2 text-[13px] text-slate-500">
-              <span className="h-1 w-1 rounded-full bg-cyan-300/70" />
-              {h}
-            </li>
-          ))}
-        </ul>
+const FILTERS: { id: Category | "all"; labelKey: "all" | Category }[] = [
+  { id: "all", labelKey: "all" },
+  { id: "ai", labelKey: "ai" },
+  { id: "automation", labelKey: "automation" },
+  { id: "web", labelKey: "web" },
+  { id: "embedded", labelKey: "embedded" },
+];
 
-        <div className="mt-5 flex flex-wrap gap-1.5">
-          {p.tags.map((tag) => (
-            <span key={tag} className="font-code rounded bg-white/[0.04] px-2 py-0.5 text-[11px] text-slate-500">
-              {tag}
+function CompactCard({ p }: { p: Project }) {
+  const { lang, t } = useLang();
+  const url = repoUrl(p);
+
+  return (
+    <div className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-[#0c0f16]/85 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/25">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <span className="font-code rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] text-slate-300">
+          {p.language}
+        </span>
+        <div className="flex gap-1.5">
+          {p.categories.map((c) => (
+            <span key={c} className="chip rounded border border-white/[0.08] bg-white/[0.03] px-1.5 py-0.5 text-slate-500">
+              {t.projects.filters[c]}
             </span>
           ))}
-        </div>
-
-        <div className="mt-6 border-t border-white/[0.07] pt-4">
-          {p.repo ? (
-            <a
-              href={`https://github.com/${p.repo}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-display inline-flex items-center gap-2 text-[14px] font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
-            >
-              {t.projects.viewRepo}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M7 7h10v10" />
-              </svg>
-            </a>
-          ) : (
-            <span className="font-code inline-flex items-center gap-2 text-[12px] text-slate-600">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <rect x="4" y="11" width="16" height="10" rx="2" />
-                <path d="M8 11V7a4 4 0 018 0v4" />
-              </svg>
-              {t.projects.privateRepo}
-            </span>
-          )}
         </div>
       </div>
-    </Reveal>
+      <h3 className="font-display text-[17px] font-bold tracking-tight text-white transition-colors group-hover:text-cyan-200">
+        {p.title[lang]}
+      </h3>
+      <p className="mt-2 flex-1 text-[13.5px] leading-relaxed text-slate-400">{p.description[lang]}</p>
+      <div className="mt-4 border-t border-white/[0.07] pt-3.5">
+        {url ? (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display inline-flex items-center gap-2 text-[13.5px] font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+          >
+            {t.projects.viewRepo}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
+        ) : (
+          <span className="font-code text-[12px] text-slate-600">{t.projects.privateRepo}</span>
+        )}
+      </div>
+    </div>
   );
 }
 
 export default function Projects() {
   const { t } = useLang();
+  const [filter, setFilter] = useState<Category | "all">("all");
+  const rootRef = useSpotlight<HTMLDivElement>();
+  const revealRef = useReveal<HTMLDivElement>();
+
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
+  const visible = filter === "all" ? rest : rest.filter((p) => p.categories.includes(filter));
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+    <div ref={rootRef} className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
       <SectionHead eyebrow={t.projects.eyebrow} title={t.projects.title} />
-      <Reveal delay={100}>
-        <p className="mt-3 max-w-2xl text-[15px] text-slate-500">{t.projects.subtitle}</p>
-      </Reveal>
+      <div ref={revealRef}>
+        <Reveal delay={100}>
+          <p className="mt-3 max-w-2xl text-[15px] text-slate-500">{t.projects.subtitle}</p>
+        </Reveal>
 
-      <Reveal delay={180}>
-        <div className="mt-8">
-          <RepoListTerminal />
+        <Reveal delay={180}>
+          <div className="mt-8">
+            <RepoListTerminal />
+          </div>
+        </Reveal>
+
+        <div className="mt-10 grid gap-6">
+          {featured.map((p, i) => (
+            <CaseCard key={p.slug} p={p} index={i} />
+          ))}
         </div>
-      </Reveal>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {featured.map((p, i) => (
-          <ProjectCard key={p.slug} p={p} index={i} />
-        ))}
-      </div>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {rest.map((p, i) => (
-          <ProjectCard key={p.slug} p={p} index={i} />
-        ))}
+        <div className="reveal mt-14">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-white">{t.projects.moreTitle}</h2>
+          <p className="mt-2 text-[14px] text-slate-500">{t.projects.moreSubtitle}</p>
+
+          <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label={t.projects.moreTitle}>
+            {FILTERS.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setFilter(f.id)}
+                aria-pressed={filter === f.id}
+                className={`chip rounded-full border px-4 py-2 transition-colors ${
+                  filter === f.id
+                    ? "border-cyan-300/50 bg-cyan-400/10 text-cyan-200"
+                    : "border-white/[0.09] bg-white/[0.02] text-slate-500 hover:border-white/20 hover:text-slate-300"
+                }`}
+              >
+                {t.projects.filters[f.labelKey]}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-live="polite">
+          {visible.map((p) => (
+            <div key={p.slug} role="listitem" className="reveal is-visible">
+              <CompactCard p={p} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -53,6 +53,34 @@ export default function Contact() {
         <p className="mt-3 max-w-xl text-[15px] text-slate-500">{t.contact.subtitle}</p>
       </Reveal>
 
+      {/* intent-driven CTAs */}
+      <div className="mt-10">
+        <h2 className="font-code mb-4 text-[12px] tracking-[0.25em] text-cyan-300/90 uppercase">
+          {"// "}{t.contact.intentsTitle}
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {t.contact.intents.map((intent, i) => (
+            <Reveal key={intent.label} delay={140 + i * 80}>
+              <a
+                href={`mailto:${profile.email}?subject=${encodeURIComponent(intent.subject)}`}
+                className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-[#0c0f16]/85 p-5 transition-all hover:-translate-y-0.5 hover:border-cyan-300/30"
+              >
+                <span className="font-display text-[15px] font-semibold text-white transition-colors group-hover:text-cyan-200">
+                  {intent.label}
+                </span>
+                <span className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-500">{intent.desc}</span>
+                <span className="font-display mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-cyan-300">
+                  {t.contact.sendEmail}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                  </svg>
+                </span>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-10 grid gap-3 sm:grid-cols-2">
         {cards.map((c, i) => {
           const inner = (
@@ -106,14 +134,6 @@ export default function Contact() {
         </div>
       </Reveal>
 
-      <Reveal delay={380}>
-        <div className="mt-14 border-t border-white/[0.07] pt-6 text-center">
-          <p className="font-code text-[12px] text-slate-600">
-            © 2026 Lucas Welter Bohrer · {t.footer.rights}
-          </p>
-          <p className="font-code mt-1 text-[11.5px] text-slate-700">{t.footer.builtWith}</p>
-        </div>
-      </Reveal>
     </div>
   );
 }

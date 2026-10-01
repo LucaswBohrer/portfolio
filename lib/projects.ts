@@ -1,10 +1,16 @@
+export type Category = "ai" | "automation" | "web" | "embedded";
+
 export interface Project {
   slug: string;
   repo: string | null; // null = private / no public link
   language: string;
-  stars: number;
   featured?: boolean;
   tags: string[];
+  categories: Category[];
+  /** key into t.caseStudies when the project has a full case study */
+  caseKey?: "nexus" | "jarvis";
+  /** public path to case media (real screenshot), if any */
+  mediaSrc?: string;
   title: { pt: string; en: string };
   description: { pt: string; en: string };
   highlights: { pt: string[]; en: string[] };
@@ -15,9 +21,10 @@ export const projects: Project[] = [
     slug: "nexus",
     repo: "LucaswBohrer/nexus",
     language: "Python",
-    stars: 0,
     featured: true,
     tags: ["Python", "FastAPI", "Telemetria", "IA"],
+    categories: ["ai", "automation", "web"],
+    caseKey: "nexus",
     title: { pt: "NEXUS", en: "NEXUS" },
     description: {
       pt: "Plataforma de inteligência elétrica: monitoramento, simulação full-stack, diagnósticos e telemetria em tempo real de sistemas elétricos.",
@@ -32,9 +39,11 @@ export const projects: Project[] = [
     slug: "jarvis",
     repo: "LucaswBohrer/jarvis",
     language: "Python",
-    stars: 0,
     featured: true,
     tags: ["Python", "Agentes de IA", "Orquestração", "Memória"],
+    categories: ["ai", "automation"],
+    caseKey: "jarvis",
+    mediaSrc: "/cases/jarvis-ui.png",
     title: { pt: "JARVIS", en: "JARVIS" },
     description: {
       pt: "Plataforma pessoal de IA local-first: orquestração de tarefas, memória tipada, política de permissões e integração com o NEXUS via API.",
@@ -49,8 +58,8 @@ export const projects: Project[] = [
     slug: "axion",
     repo: "LucaswBohrer/AxionLabs-site",
     language: "TypeScript",
-    stars: 1,
     tags: ["TypeScript", "React", "Robótica", "UI/UX"],
+    categories: ["web", "embedded"],
     title: { pt: "Axion Labs", en: "Axion Labs" },
     description: {
       pt: "Site corporativo premium para empresa de robótica e IA — e o conceito do robô companheiro interativo Axion: sensores, display e comportamentos em tempo real.",
@@ -65,8 +74,8 @@ export const projects: Project[] = [
     slug: "os-manager",
     repo: "LucaswBohrer/os-manager-v2",
     language: "TypeScript",
-    stars: 1,
     tags: ["TypeScript", "Local-first", "Gestão"],
+    categories: ["web", "automation"],
     title: { pt: "OS Manager v2", en: "OS Manager v2" },
     description: {
       pt: "Sistema profissional de gerenciamento de Ordens de Serviço: local-first, modular e seguro, pensado para assistência técnica eletrônica.",
@@ -81,8 +90,8 @@ export const projects: Project[] = [
     slug: "farmtech",
     repo: "LucaswBohrer/Farmtech-Solutions-Fase-2",
     language: "C++",
-    stars: 0,
     tags: ["ESP32", "IoT", "Python", "R"],
+    categories: ["embedded", "automation", "ai"],
     title: { pt: "FarmTech — Irrigação Inteligente", en: "FarmTech — Smart Irrigation" },
     description: {
       pt: "Sistema de irrigação inteligente com ESP32: sensores, automação e análise de dados em Python/R para agricultura de precisão.",
@@ -94,11 +103,11 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "e2ps-manual-builder",
+    slug: "e2ps-builder",
     repo: "LucaswBohrer/e2ps-manual-builder",
     language: "Python",
-    stars: 1,
     tags: ["Python", "Desktop", "Automação"],
+    categories: ["automation", "ai"],
     title: { pt: "E2PS Manual Builder", en: "E2PS Manual Builder" },
     description: {
       pt: "Aplicação desktop que auxilia a criação de manuais técnicos em R Markdown — automação de documentação de engenharia.",
@@ -113,40 +122,44 @@ export const projects: Project[] = [
     slug: "nexa",
     repo: "LucaswBohrer/nexa-landing-page",
     language: "TypeScript",
-    stars: 0,
     tags: ["TypeScript", "Landing Page", "UI/UX"],
+    categories: ["web"],
     title: { pt: "NEXA — Landing Page", en: "NEXA — Landing Page" },
     description: {
       pt: "Landing page SaaS para automação inteligente com IA: design, copy e estrutura de conversão.",
-      en: "SaaS landing page for AI-powered intelligent automation: design, copy and conversion structure.",
+      en: "SaaS landing page for intelligent AI automation: design, copy and conversion structure.",
     },
     highlights: {
-      pt: ["Design responsivo", "Foco em conversão", "Performance"],
-      en: ["Responsive design", "Conversion-focused", "Performance"],
+      pt: ["Design responsivo", "Copy de conversão", "Performance"],
+      en: ["Responsive design", "Conversion copy", "Performance"],
     },
   },
   {
     slug: "travel-agent",
     repo: "LucaswBohrer/travel-intelligence-agent",
     language: "TypeScript",
-    stars: 1,
-    tags: ["TypeScript", "Agentes de IA", "APIs"],
+    tags: ["TypeScript", "Agentes", "IA"],
+    categories: ["ai", "web"],
     title: { pt: "Travel Intelligence Agent", en: "Travel Intelligence Agent" },
     description: {
-      pt: "Agente inteligente para planejamento de viagens: orquestração de informações e APIs em um fluxo conversacional.",
-      en: "Intelligent agent for travel planning: orchestrating information and APIs in a conversational flow.",
+      pt: "Agente inteligente de planejamento de viagens: pesquisa, comparação e recomendações automatizadas.",
+      en: "Intelligent travel planning agent: automated research, comparison and recommendations.",
     },
     highlights: {
-      pt: ["Agente conversacional", "Integração de APIs", "Orquestração"],
-      en: ["Conversational agent", "API integration", "Orchestration"],
+      pt: ["Agente autônomo", "Pesquisa web", "Recomendações"],
+      en: ["Autonomous agent", "Web research", "Recommendations"],
     },
   },
 ];
 
+export function repoUrl(p: Project): string | null {
+  return p.repo ? `https://github.com/${p.repo}` : null;
+}
+
 export const profile = {
   name: "Lucas Welter Bohrer",
-  github: "https://github.com/LucaswBohrer",
   email: "bohrer.welter.lucas@gmail.com",
   phone: "+55 51 99750-5450",
   location: { pt: "Novo Hamburgo, RS — Brasil", en: "Novo Hamburgo, RS — Brazil" },
+  github: "https://github.com/LucaswBohrer",
 };
