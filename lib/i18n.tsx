@@ -27,6 +27,7 @@ export interface CaseStudyDict {
 
 export interface Dict {
   nav: { home: string; about: string; projects: string; experience: string; contact: string };
+  menu: { open: string; close: string; language: string };
   hero: {
     eyebrow: string;
     role: string;
@@ -128,6 +129,7 @@ export interface Dict {
 
 const pt: Dict = {
   nav: { home: "Início", about: "Sobre", projects: "Projetos", experience: "Experiência", contact: "Contato" },
+  menu: { open: "Abrir menu", close: "Fechar menu", language: "Idioma" },
   hero: {
     eyebrow: "Portfólio · 2026",
     role: "Estudante de Engenharia de IA · Automação & Sistemas Embarcados",
@@ -382,6 +384,7 @@ const pt: Dict = {
 
 const en: Dict = {
   nav: { home: "Home", about: "About", projects: "Projects", experience: "Experience", contact: "Contact" },
+  menu: { open: "Open menu", close: "Close menu", language: "Language" },
   hero: {
     eyebrow: "Portfolio · 2026",
     role: "AI Engineering Student · Automation & Embedded Systems",
