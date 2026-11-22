@@ -13,14 +13,14 @@ interface Row {
 }
 
 const COLOR: Record<SegColor, string> = {
-  cyan: "text-cyan-300",
-  green: "text-emerald-300",
+  cyan: "text-accent",
+  green: "text-ok",
   indigo: "text-indigo-300",
-  dim: "text-slate-500",
-  white: "text-white",
-  red: "text-red-400",
-  yellow: "text-amber-300",
-  plain: "text-slate-300",
+  dim: "text-dim",
+  white: "text-fog",
+  red: "text-danger",
+  yellow: "text-warn",
+  plain: "text-muted",
 };
 
 function Segs({ segs }: { segs: TermLineData }) {
@@ -32,7 +32,7 @@ function Segs({ segs }: { segs: TermLineData }) {
             key={i}
             href={s.href}
             {...(s.href.startsWith("mailto:") ? {} : { target: "_blank", rel: "noreferrer" })}
-            className={`${COLOR[s.color ?? "plain"]} ${s.bold ? "font-bold" : ""} underline decoration-cyan-300/30 underline-offset-2 hover:decoration-cyan-300`}
+            className={`${COLOR[s.color ?? "plain"]} ${s.bold ? "font-bold" : ""} underline decoration-accent/30 underline-offset-2 hover:decoration-accent`}
           >
             {s.text}
           </a>
@@ -49,10 +49,10 @@ function Segs({ segs }: { segs: TermLineData }) {
 function Prompt() {
   return (
     <span className="select-none" aria-hidden="true">
-      <span className="text-emerald-400">lucas@dev</span>
-      <span className="text-slate-500">:</span>
-      <span className="text-cyan-300">~</span>
-      <span className="text-slate-500">$&nbsp;</span>
+      <span className="text-ok">lucas@dev</span>
+      <span className="text-dim">:</span>
+      <span className="text-accent">~</span>
+      <span className="text-dim">$&nbsp;</span>
     </span>
   );
 }
@@ -141,12 +141,12 @@ export default function InteractiveTerminal() {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#0b0e15]/90 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] backdrop-blur">
-      <div className="flex items-center gap-2 border-b border-white/[0.07] px-4 py-3">
+    <div className="overflow-hidden rounded-2xl border border-line bg-surface/90 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] backdrop-blur">
+      <div className="flex items-center gap-2 border-b border-line px-4 py-3">
         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
         <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-        <span className="font-code ml-3 text-[12px] text-slate-500">{t.terminal.title}</span>
+        <span className="font-code ml-3 text-[12px] text-dim">{t.terminal.title}</span>
       </div>
       <div
         ref={scrollRef}
@@ -160,7 +160,7 @@ export default function InteractiveTerminal() {
             {r.echo !== undefined ? (
               <span>
                 <Prompt />
-                <span className="text-slate-200">{r.echo}</span>
+                <span className="text-fog">{r.echo}</span>
               </span>
             ) : (
               r.segs && <Segs segs={r.segs} />
@@ -182,11 +182,11 @@ export default function InteractiveTerminal() {
             autoComplete="off"
             spellCheck={false}
             size={Math.max(input.length, 1)}
-            className="font-code min-w-0 flex-shrink bg-transparent text-slate-200 caret-transparent outline-none"
+            className="font-code min-w-0 flex-shrink bg-transparent text-fog caret-transparent outline-none"
           />
           <span
             aria-hidden="true"
-            className={`mt-[3px] inline-block h-[15px] w-[8px] shrink-0 bg-cyan-300 ${focused ? "" : "opacity-40"}`}
+            className={`mt-[3px] inline-block h-[15px] w-[8px] shrink-0 bg-accent ${focused ? "" : "opacity-40"}`}
             style={{ animation: "caret-blink 1.1s infinite" }}
           />
         </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { LangProvider } from "@/lib/i18n";
+import { ThemeProvider, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "Lucas Welter Bohrer — Portfólio",
     type: "website",
     locale: "pt_BR",
-    alternateLocale: ["en_US"],
+    alternateLocale: ["en_US", "es_ES"],
     images: [
       {
         url: "/og-image.png",
@@ -89,7 +90,7 @@ const jsonLd = {
       "@id": `${SITE_URL}#website`,
       url: SITE_URL,
       name: "Lucas Welter Bohrer — Portfólio",
-      inLanguage: ["pt-BR", "en"],
+      inLanguage: ["pt-BR", "en", "es"],
       author: { "@id": `${SITE_URL}#person` },
     },
   ],
@@ -101,12 +102,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <LangProvider>{children}</LangProvider>
+        <LangProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </LangProvider>
       </body>
     </html>
   );

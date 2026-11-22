@@ -36,12 +36,13 @@ const fill = (template: string, value: string): string => template.replace("{cmd
 /** Boot screen: the familiar `perfil` object, then the hint. */
 export function bootLines(d: Dict, lang: Lang): TermLineData[] {
   const t = d.terminal;
+  const k = (pt: string, es: string): string => (lang === "es" ? es : pt);
   const q = (s: string): string => `"${s}"`;
   return [
     line(seg("const ", "cyan"), seg("perfil ", "white", undefined, true), seg("= ", "dim"), seg("{")),
-    line(seg("  nome", "indigo"), seg(": ", "dim"), seg(q(profile.name), "green"), seg(",", "dim")),
+    line(seg(`  ${k("nome", "nombre")}`, "indigo"), seg(": ", "dim"), seg(q(profile.name), "green"), seg(",", "dim")),
     line(
-      seg("  foco", "indigo"),
+      seg(`  ${k("foco", "enfoque")}`, "indigo"),
       seg(": ", "dim"),
       seg(`[${t.bootFocus.map(q).join(", ")}]`, "green"),
       seg(",", "dim")
@@ -52,8 +53,8 @@ export function bootLines(d: Dict, lang: Lang): TermLineData[] {
       seg(`[${t.bootStack.map(q).join(", ")}]`, "green"),
       seg(",", "dim")
     ),
-    line(seg("  base", "indigo"), seg(": ", "dim"), seg(q(t.bootBase), "green"), seg(",", "dim")),
-    line(seg("  local", "indigo"), seg(": ", "dim"), seg(q(profile.location[lang]), "green"), seg(",", "dim")),
+    line(seg(`  ${k("base", "base")}`, "indigo"), seg(": ", "dim"), seg(q(t.bootBase), "green"), seg(",", "dim")),
+    line(seg(`  ${k("local", "ubicación")}`, "indigo"), seg(": ", "dim"), seg(q(profile.location[lang]), "green"), seg(",", "dim")),
     line(seg("};")),
     line(seg(t.hint, "dim")),
   ];
@@ -62,6 +63,7 @@ export function bootLines(d: Dict, lang: Lang): TermLineData[] {
 const ALIASES: Record<string, string> = {
   help: "help",
   ajuda: "help",
+  ayuda: "help",
   whoami: "whoami",
   projetos: "projects",
   projects: "projects",
@@ -80,12 +82,13 @@ const ALIASES: Record<string, string> = {
   echo: "echo",
   clear: "clear",
   limpar: "clear",
+  limpiar: "clear",
   cls: "clear",
   github: "github",
 };
 
 const EGG_EDITORS = new Set(["vim", "vi", "nano", "emacs", "code"]);
-const EGG_EXIT = new Set(["exit", "quit", "logout", ":q"]);
+const EGG_EXIT = new Set(["exit", "quit", "logout", ":q", "salir"]);
 
 export function runCommand(rawInput: string, d: Dict, lang: Lang): CmdResult {
   const t = d.terminal;
@@ -147,7 +150,7 @@ export function runCommand(rawInput: string, d: Dict, lang: Lang): CmdResult {
           seg(p.language),
           seg("  ·  ", "dim"),
           seg(`${t.stackLabel}: `, "dim"),
-          seg(p.tags.join(" · "))
+          seg(p.tags[lang].join(" · "))
         ),
         line(seg(`${t.highlightsLabel}:`, "cyan")),
         ...p.highlights[lang].map((h) => line(seg("  ✓ ", "green"), seg(h))),

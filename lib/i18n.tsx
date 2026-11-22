@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type Lang = "pt" | "en";
+export type Lang = "pt" | "en" | "es";
 
 const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: Dict } | null>(null);
 
@@ -28,6 +28,7 @@ export interface CaseStudyDict {
 export interface Dict {
   nav: { home: string; about: string; projects: string; playground: string; experience: string; contact: string };
   menu: { open: string; close: string; language: string };
+  theme: { toggle: string; label: string };
   hero: {
     eyebrow: string;
     role: string;
@@ -185,6 +186,7 @@ export interface Dict {
 const pt: Dict = {
   nav: { home: "Início", about: "Sobre", projects: "Projetos", playground: "Playground", experience: "Experiência", contact: "Contato" },
   menu: { open: "Abrir menu", close: "Fechar menu", language: "Idioma" },
+  theme: { toggle: "Alternar entre tema claro e escuro", label: "Tema" },
   hero: {
     eyebrow: "Portfólio · 2026",
     role: "Estudante de Engenharia de IA · Automação & Sistemas Embarcados",
@@ -508,6 +510,7 @@ const pt: Dict = {
 const en: Dict = {
   nav: { home: "Home", about: "About", projects: "Projects", playground: "Playground", experience: "Experience", contact: "Contact" },
   menu: { open: "Open menu", close: "Close menu", language: "Language" },
+  theme: { toggle: "Switch between light and dark theme", label: "Theme" },
   hero: {
     eyebrow: "Portfolio · 2026",
     role: "AI Engineering Student · Automation & Embedded Systems",
@@ -827,20 +830,344 @@ const en: Dict = {
   },
 };
 
-export const dictionaries: Record<Lang, Dict> = { pt, en };
+const es: Dict = {
+  nav: { home: "Inicio", about: "Sobre mí", projects: "Proyectos", playground: "Playground", experience: "Experiencia", contact: "Contacto" },
+  menu: { open: "Abrir menú", close: "Cerrar menú", language: "Idioma" },
+  theme: { toggle: "Cambiar entre tema claro y oscuro", label: "Tema" },
+  hero: {
+    eyebrow: "Portafolio · 2026",
+    role: "Estudiante de Ingeniería en IA · Automatización y Sistemas Embebidos",
+    intro:
+      "Construyo agentes de IA, automatizaciones y sistemas embebidos — del circuito al despliegue.",
+    ctaProjects: "Ver proyectos",
+    ctaContact: "Contactarme",
+    stats: { label1: "repositorios públicos", label2: "años en electrónica", label3: "títulos en curso" },
+    terminalTitle: "perfil.ts",
+    available: "Disponible para proyectos y pasantías",
+    servicesEyebrow: "Cómo puedo ayudar",
+    servicesTitle: "Tres formas de generar valor.",
+    servicesSubtitle:
+      "Soy estudiante — y justamente por eso entrego con seriedad: alcance claro, comunicación directa y código que funciona.",
+    services: [
+      {
+        title: "Agentes y automatización con IA",
+        desc: "Asistentes, agentes y flujos automatizados que resuelven tareas reales: atención, triaje, integración con APIs y herramientas del día a día.",
+        tags: ["Agentes de IA", "Automatizaciones", "Integraciones"],
+      },
+      {
+        title: "APIs y plataformas full-stack",
+        desc: "Back-ends en Python, integraciones y dashboards web: del modelo de datos a la interfaz, con foco en claridad y mantenimiento.",
+        tags: ["Python", "REST APIs", "Dashboards"],
+      },
+      {
+        title: "Prototipos embebidos e IoT",
+        desc: "Del esquemático al firmware: ESP32, sensores y telemetría conectados al software — electrónica que habla con la nube.",
+        tags: ["ESP32", "Sensores", "Telemetría"],
+      },
+    ],
+  },
+  about: {
+    eyebrow: "Sobre mí",
+    title: "Ingeniero en formación, constructor por naturaleza.",
+    p1: "Soy estudiante de Tecnología en Inteligencia Artificial en FIAP y de Ingeniería Eléctrica en la Universidade Feevale, con una sólida base práctica en electrónica — trabajo desde 2021 en mantenimiento y diagnóstico de hardware en Eletrônica Digital, y hoy también como pasante de Ingeniería Eléctrica en E2PS.",
+    p2: "Mi forma de aprender es construir: plataformas de monitoreo eléctrico con IA, agentes inteligentes, automatización industrial, sistemas embebidos y robótica. Me gusta ir de la causa raíz al sistema funcionando — del circuito a la API, del prototipo al despliegue.",
+    educationTitle: "Formación",
+    skillsTitle: "Habilidades técnicas",
+    languagesTitle: "Idiomas",
+    neofetch: {
+      user: "lucas@dev",
+      degree: "Formación",
+      degreeValue: "FIAP · Feevale",
+      stack: "Stack",
+      stackValue: "Python · TypeScript",
+      focus: "Enfoque",
+      focusValue: "IA · automatización · sistemas",
+      base: "Base",
+      baseValue: "electrónica · circuitos",
+    },
+    skillGroups: [
+      {
+        title: "IA y Automatización",
+        items: ["Agentes de IA", "IA Generativa", "Prompt Engineering", "Desarrollo asistido por IA", "Industria 4.0"],
+      },
+      {
+        title: "Software y Web",
+        items: ["Python", "TypeScript", "Full-Stack", "Git y GitHub", "Debugging"],
+      },
+      {
+        title: "APIs y Sistemas",
+        items: ["REST APIs", "HTTP / JSON", "Arquitectura cliente-servidor", "Integración de sistemas"],
+      },
+      {
+        title: "Ingeniería y Hardware",
+        items: ["Mantenimiento electrónico", "Análisis de circuitos", "Microcontroladores", "Modelado 3D / CAD", "Prototipado rápido"],
+      },
+    ],
+    education: [
+      {
+        school: "FIAP — Brasil",
+        course: "Tecnólogo en Inteligencia Artificial",
+        period: "2026 — en curso",
+        note: "Enfoque en agentes de IA, IA generativa y automatización.",
+      },
+      {
+        school: "Universidade Feevale — Brasil",
+        course: "Licenciatura en Ingeniería Eléctrica",
+        period: "2026 — en curso",
+        note: "Base en circuitos, sistemas eléctricos e ingeniería.",
+      },
+      {
+        school: "Escola META — Brasil",
+        course: "Formación Profesional en Electrónica",
+        period: "Completado",
+        note: "Enfoque en análisis de circuitos y diagnóstico de fallas.",
+      },
+    ],
+    languages: [
+      { lang: "Portugués", level: "Nativo" },
+      { lang: "Inglés", level: "B2 · Intermedio-avanzado" },
+    ],
+  },
+  projects: {
+    eyebrow: "Proyectos",
+    title: "Trabajo seleccionado.",
+    subtitle: "Dos casos en profundidad y una selección de repositorios — sistemas reales, no demos falsas.",
+    viewRepo: "Ver repositorio",
+    viewLive: "Ver sitio en vivo",
+    viewCase: "Ver caso",
+    hideCase: "Ocultar caso",
+    privateRepo: "Repositorio privado",
+    featured: "Destacado",
+    updated: "actualizado el",
+    filters: { all: "Todos", ai: "IA", automation: "Automatización", web: "Web", embedded: "Embebidos", systems: "Sistemas" },
+    moreTitle: "Más repositorios",
+    moreSubtitle: "Proyectos complementarios — filtra por área de interés.",
+    caseLabels: {
+      problem: "Problema",
+      solution: "Solución",
+      role: "Mi rol",
+      architecture: "Arquitectura",
+      challenge: "Desafío técnico",
+      result: "Resultado",
+      demo: "Demo",
+      status: "Estado",
+      stack: "Stack",
+      links: "Enlaces",
+    },
+    galleryTitle: "Galería del producto",
+    testCount: {
+      validated: "pruebas automatizadas validadas",
+      lastVerified: "Última validación",
+      fallback: "Suite de pruebas verificada en CI",
+      viewRun: "ver ejecución en CI",
+      ariaExplainer:
+        "Número de pruebas recopiladas automáticamente por pytest en la última ejecución exitosa de CI",
+    },
+  },
+  caseStudies: {
+    nexus: {
+      name: "NEXUS",
+      tagline: "Plataforma de inteligencia eléctrica — del monitoreo al diagnóstico.",
+      problem:
+        "Monitorear sistemas eléctricos en tiempo real exige unir telemetría, diagnóstico y visualización en una plataforma confiable — sin depender de soluciones caras y cerradas.",
+      solution:
+        "Plataforma full-stack de inteligencia eléctrica: recolección y simulación de telemetría, diagnósticos y dashboards en tiempo real, con API HTTP versionada.",
+      role: "Autor y único desarrollador — arquitectura, back-end, front-end y simulación de telemetría.",
+      architecture:
+        "Back-end en Python (FastAPI) con API versionada · simulación de telemetría · front-end web con dashboards en tiempo real.",
+      challenge:
+        "Mantener los datos de telemetría consistentes y en tiempo real entre simulación, API e interfaz — sin valores falsos en el dashboard.",
+      result:
+        "Plataforma funcional con flujo completo de simulación, API, dashboards y diagnósticos, evolucionada en múltiples fases.",
+      demo: "Demo local disponible en el README del repositorio.",
+      status: "En desarrollo activo",
+      stack: ["Python", "FastAPI", "SQLite", "Web", "Telemetría"],
+      mediaAlt: "Dashboard de NEXUS con telemetría eléctrica en tiempo real",
+      gallery: [
+        {
+          src: "/cases/nexus-monitor.png",
+          width: 1591,
+          height: 650,
+          alt: "Monitor de NEXUS con telemetría en tiempo real y gráfico de potencia activa reciente",
+          caption: "Monitor — telemetría en tiempo real vía SSE",
+        },
+        {
+          src: "/cases/nexus-equipamentos.png",
+          width: 1592,
+          height: 681,
+          alt: "Pantalla de equipos de NEXUS con gestión multiequipo y última lectura por equipo",
+          caption: "Equipos — gestión multiequipo (fase 2.4)",
+        },
+      ],
+      galleryDiagramCaption: "Arquitectura — simulación → API → dashboards",
+    },
+    jarvis: {
+      name: "JARVIS",
+      tagline: "Plataforma personal de IA — orquestación con memoria y permisos explícitos.",
+      problem:
+        "Las herramientas de IA genéricas no conocen mi contexto: proyectos, decisiones y rutina. Quería un sistema personal que orquestara tareas con memoria y permisos explícitos.",
+      solution:
+        "Plataforma personal de IA local-first: máquina de estados de tareas, memoria tipada, política de permisos deny-by-default e integración con NEXUS vía API.",
+      role: "Autor — arquitectura, contratos, motor de orquestación, política de seguridad e interfaz web.",
+      architecture:
+        "Core en Python (Pydantic, SQLite + FTS5, Alembic) · pipeline ToolRequest → Policy → Executor → Verifier → AuditLog · adaptador HTTP para NEXUS · shell web en un solo archivo.",
+      challenge:
+        "Garantizar que la automatización nunca ejecute nada sin permiso explícito — política y auditoría antes de cualquier escritura.",
+      result:
+        "Fases 1–3 implementadas y validadas — pipeline vertical completo funcionando con datos reales.",
+      status: "En evolución — fases 1–3 completadas",
+      stack: ["Python", "Pydantic", "SQLite", "FastAPI", "Vanilla JS"],
+      mediaAlt: "Interfaz de JARVIS — centro de comando con orbe de estado",
+    },
+  },
+  experience: {
+    eyebrow: "Experiencia",
+    title: "Dónde he trabajado.",
+    subtitle: "Mi trayectoria profesional hasta ahora.",
+    jobs: [
+      {
+        role: "Pasante de Ingeniería Eléctrica",
+        company: "E2PS",
+        period: "2026 — actual",
+        location: "Remoto · Brasil",
+        bullets: [
+          "Apoyo a actividades de ingeniería y documentación técnica en un entorno profesional remoto.",
+          "Trabajo con información técnica estructurada, documentación y procesos vinculados a tecnología.",
+          "Contribución a proyectos técnicos con análisis, organización y resolución de problemas.",
+        ],
+      },
+      {
+        role: "Técnico en Mantenimiento Electrónico",
+        company: "Eletrônica Digital",
+        period: "2021 — actual",
+        location: "Brasil",
+        bullets: [
+          "Diagnóstico y reparación de hardware complejo, con análisis de fallas y soluciones prácticas.",
+          "Atención técnica directa al cliente, explicando problemas complejos de forma clara.",
+          "Gestión de múltiples demandas técnicas con priorización por criticidad.",
+        ],
+      },
+    ],
+  },
+  contact: {
+    eyebrow: "Contacto",
+    title: "¿Construimos algo juntos?",
+    subtitle: "Elige el tema y escríbeme — respondo con alcance y próximos pasos, sin rodeos.",
+    emailLabel: "Correo electrónico",
+    phoneLabel: "Teléfono",
+    locationLabel: "Ubicación",
+    githubLabel: "GitHub",
+    cvLabel: "Descargar CV",
+    cvHint: "PDF · actualizado en 2026",
+    sendEmail: "Enviar correo",
+    whatsappMessage: "¡Hola! Vengo desde tu portafolio y me gustaría conversar.",
+    intentsTitle: "¿Cómo quieres empezar?",
+    intents: [
+      {
+        label: "Hablar sobre un proyecto",
+        desc: "Una idea, automatización o prototipo — cuéntame el problema que quieres resolver.",
+        subject: "Proyecto — quiero conversar sobre una idea",
+      },
+      {
+        label: "Ver disponibilidad para pasantía",
+        desc: "Pasantía o puesto júnior en IA, automatización, software o ingeniería.",
+        subject: "Pasantía — disponibilidad",
+      },
+      {
+        label: "Hablar de IA y automatización",
+        desc: "Dudas, colaboraciones o alianzas en IA aplicada y automatización.",
+        subject: "IA y automatización — contacto",
+      },
+    ],
+  },
+  footer: {
+    rights: "Todos los derechos reservados.",
+    builtWith: "Construido con Next.js, React y Tailwind CSS.",
+    tagline: "Del circuito al despliegue.",
+  },
+  terminal: {
+    title: "terminal — lucas@dev",
+    hint: "Terminal interactiva — escribe `help` y pulsa Enter.",
+    inputLabel: "Terminal interactiva — escribe un comando y pulsa Enter",
+    helpIntro: "Comandos disponibles:",
+    help: [
+      { cmd: "help", desc: "muestra esta ayuda" },
+      { cmd: "whoami", desc: "quién es Lucas" },
+      { cmd: "proyectos", desc: "lista los proyectos del portafolio" },
+      { cmd: "proyecto <nombre>", desc: "detalles de un proyecto · ej.: proyecto aurora-vm" },
+      { cmd: "skills", desc: "habilidades técnicas" },
+      { cmd: "experiencia", desc: "trayectoria profesional" },
+      { cmd: "contacto", desc: "cómo contactarme" },
+      { cmd: "neofetch", desc: "ficha rápida del sistema" },
+      { cmd: "cv", desc: "enlace al CV en PDF" },
+      { cmd: "echo <texto>", desc: "repite el texto (clásico)" },
+      { cmd: "clear", desc: "limpia la terminal" },
+    ],
+    unknown: "comando no encontrado: {cmd}",
+    tryHelp: "Escribe `help` para ver los comandos disponibles.",
+    projectsIntro: "{n} proyectos en el portafolio — usa `proyecto <nombre>` para ver detalles:",
+    projectUsage: "uso: proyecto <nombre> · ej.: proyecto aurora-vm",
+    projectNotFound: "proyecto no encontrado: {cmd}",
+    stackLabel: "stack",
+    highlightsLabel: "aspectos destacados",
+    repoLabel: "repo",
+    languageLabel: "lenguaje",
+    contactTitle: "contacto —",
+    skillsTitle: "habilidades —",
+    expTitle: "experiencia —",
+    bootFocus: ["IA", "automatización", "sistemas"],
+    bootStack: ["Python", "TypeScript", "APIs"],
+    bootBase: "circuitos → despliegue",
+    sudoEgg: "permission denied: por aquí nadie tiene sudo. Ni yo.",
+    editorEgg: "sin editores de texto por aquí — prueba con `help`.",
+    rmEgg: "buen intento. No se borró nada (no había nada que borrar).",
+    exitEgg: "esta terminal no tiene salida. Solo queda explorar.",
+  },
+  playground: {
+    eyebrow: "AURORA VM · jugable",
+    title: "Ejecuta la VM en tu navegador",
+    subtitle:
+      "El núcleo de la AURORA VM — ensamblador + CPU de 43 instrucciones — portado a TypeScript y corriendo 100% en tu navegador. Escribe Assembly, ensambla, ejecuta paso a paso e inspecciona registros, flags, stack y disassembly.",
+    examplesLabel: "Ejemplos",
+    assemble: "Ensamblar",
+    run: "Ejecutar",
+    step: "Paso",
+    reset: "Reiniciar",
+    stop: "Detener",
+    editorLabel: "Editor Assembly",
+    consoleLabel: "Consola",
+    regsLabel: "Registros",
+    disasmLabel: "Disassembly",
+    stackLabel: "Stack",
+    stdinLabel: "stdin (para IN)",
+    stdinPlaceholder: "bytes de entrada…",
+    statusIdle: "edita el código y ensambla para empezar",
+    statusAssembled: "ensamblado — listo para ejecutar",
+    statusRunning: "ejecutando…",
+    statusHalted: "terminado",
+    statusFatal: "error fatal",
+    haltedMsg: "terminated: NORMAL (HALT), exit code {n}",
+    stepsLabel: "pasos",
+    bytesLabel: "bytes",
+    consoleHint: "La salida del programa (OUT / OUTC) aparece aquí.",
+    stackEmpty: "stack vacía",
+  },
+};
+
+export const dictionaries: Record<Lang, Dict> = { pt, en, es };
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("pt");
 
   useEffect(() => {
     const saved = window.localStorage.getItem("portfolio-lang");
-    if (saved === "pt" || saved === "en") setLangState(saved);
+    if (saved === "pt" || saved === "en" || saved === "es") setLangState(saved);
   }, []);
 
   const setLang = (l: Lang) => {
     setLangState(l);
     window.localStorage.setItem("portfolio-lang", l);
-    document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
+    document.documentElement.lang = l === "pt" ? "pt-BR" : l === "es" ? "es" : "en";
   };
 
   return <LangContext.Provider value={{ lang, setLang, t: dictionaries[lang] }}>{children}</LangContext.Provider>;

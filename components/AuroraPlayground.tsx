@@ -35,14 +35,14 @@ function StatusPill({ status, label }: { status: Status; label: string }) {
     status === "running"
       ? "bg-amber-300 animate-pulse"
       : status === "halted"
-        ? "bg-emerald-300"
+        ? "bg-ok"
         : status === "fatal"
-          ? "bg-red-400"
+          ? "bg-danger"
           : status === "assembled"
-            ? "bg-cyan-300"
+            ? "bg-accent"
             : "bg-slate-500";
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[12px] font-medium text-slate-300">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-tint/[0.03] px-3 py-1 text-[12px] font-medium text-muted">
       <span className={`h-2 w-2 rounded-full ${dot}`} aria-hidden="true" />
       {label}
     </span>
@@ -52,11 +52,11 @@ function StatusPill({ status, label }: { status: Status; label: string }) {
 function Reg({ name, value, dim }: { name: string; value: string; dim?: boolean }) {
   return (
     <div
-      className="flex min-w-0 items-baseline justify-between gap-2 rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5"
+      className="flex min-w-0 items-baseline justify-between gap-2 rounded-lg border border-line bg-tint/[0.02] px-2.5 py-1.5"
       title={`${name} = ${value}`}
     >
-      <span className="shrink-0 font-mono text-[11px] font-semibold text-cyan-300/80">{name}</span>
-      <span className={`truncate font-mono text-[12px] ${dim ? "text-slate-500" : "text-slate-200"}`}>{value}</span>
+      <span className="shrink-0 font-mono text-[11px] font-semibold text-accent/80">{name}</span>
+      <span className={`truncate font-mono text-[12px] ${dim ? "text-dim" : "text-fog"}`}>{value}</span>
     </div>
   );
 }
@@ -281,16 +281,16 @@ export default function AuroraPlayground() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
       <SectionHead eyebrow={pg.eyebrow} title={pg.title} />
-      <p className="mt-4 max-w-3xl text-[15.5px] leading-relaxed text-slate-400">{pg.subtitle}</p>
+      <p className="mt-4 max-w-3xl text-[15.5px] leading-relaxed text-muted">{pg.subtitle}</p>
 
       {/* controls */}
       <div className="mt-8 flex flex-wrap items-center gap-3">
-        <label className="flex items-center gap-2 text-[13px] text-slate-400">
+        <label className="flex items-center gap-2 text-[13px] text-muted">
           <span className="font-medium">{pg.examplesLabel}</span>
           <select
             value={exampleId}
             onChange={(e) => selectExample(e.target.value)}
-            className="rounded-lg border border-white/[0.08] bg-[#0c0f16] px-3 py-2 font-mono text-[13px] text-slate-200 outline-none focus:border-cyan-300/50"
+            className="rounded-lg border border-line bg-surface px-3 py-2 font-mono text-[13px] text-fog outline-none focus:border-accent/50"
           >
             {EXAMPLES.map((e) => (
               <option key={e.id} value={e.id}>
@@ -303,28 +303,28 @@ export default function AuroraPlayground() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => doAssemble(source, stdinText)}
-            className="rounded-lg bg-cyan-300 px-4 py-2 text-[13px] font-semibold text-[#07090d] transition-colors hover:bg-cyan-200"
+            className="rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-ink transition-colors hover:brightness-110"
           >
             {pg.assemble}
           </button>
           <button
             onClick={doRun}
             disabled={!canControl}
-            className="rounded-lg bg-cyan-300/15 px-4 py-2 text-[13px] font-semibold text-cyan-300 transition-colors hover:bg-cyan-300/25 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg bg-accent/15 px-4 py-2 text-[13px] font-semibold text-accent transition-colors hover:bg-accent/25 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {pg.run}
           </button>
           <button
             onClick={doStep}
             disabled={!canControl}
-            className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[13px] font-semibold text-slate-200 transition-colors hover:bg-white/[0.07] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-line bg-tint/[0.03] px-4 py-2 text-[13px] font-semibold text-fog transition-colors hover:bg-tint/[0.07] disabled:cursor-not-allowed disabled:opacity-40"
           >
             {pg.step}
           </button>
           {running && (
             <button
               onClick={doStop}
-              className="rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2 text-[13px] font-semibold text-red-300 transition-colors hover:bg-red-400/20"
+              className="rounded-lg border border-red-400/30 bg-danger/10 px-4 py-2 text-[13px] font-semibold text-danger transition-colors hover:bg-danger/20"
             >
               {pg.stop}
             </button>
@@ -332,7 +332,7 @@ export default function AuroraPlayground() {
           <button
             onClick={doReset}
             disabled={running}
-            className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[13px] font-semibold text-slate-200 transition-colors hover:bg-white/[0.07] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-line bg-tint/[0.03] px-4 py-2 text-[13px] font-semibold text-fog transition-colors hover:bg-tint/[0.07] disabled:cursor-not-allowed disabled:opacity-40"
           >
             {pg.reset}
           </button>
@@ -340,14 +340,14 @@ export default function AuroraPlayground() {
 
         <StatusPill status={status} label={statusLabel} />
         {vm && (
-          <span className="font-mono text-[12px] text-slate-500">
+          <span className="font-mono text-[12px] text-dim">
             {vm.steps} {pg.stepsLabel} · {codeBytes} {pg.bytesLabel}
           </span>
         )}
       </div>
 
       {asmError && (
-        <div className="mt-4 rounded-xl border border-red-400/25 bg-red-400/[0.07] px-4 py-3 font-mono text-[13px] text-red-300">
+        <div className="mt-4 rounded-xl border border-red-400/25 bg-danger/[0.07] px-4 py-3 font-mono text-[13px] text-danger">
           {asmError}
         </div>
       )}
@@ -356,14 +356,14 @@ export default function AuroraPlayground() {
       <div className="mt-6 grid gap-4 lg:grid-cols-5">
         {/* editor */}
         <div className="lg:col-span-3">
-          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
+          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-dim">
             {pg.editorLabel}
           </p>
-          <div className="flex overflow-hidden rounded-xl border border-white/[0.08] bg-[#0a0d13]">
+          <div className="flex overflow-hidden rounded-xl border border-line bg-surface">
             <div
               ref={gutterRef}
               aria-hidden="true"
-              className="select-none overflow-hidden border-r border-white/[0.06] bg-white/[0.02] px-3 py-3 text-right font-mono text-[13px] leading-6 text-slate-600"
+              className="select-none overflow-hidden border-r border-line bg-tint/[0.02] px-3 py-3 text-right font-mono text-[13px] leading-6 text-dim"
             >
               {Array.from({ length: lineCount }, (_, i) => (
                 <div key={i}>{i + 1}</div>
@@ -388,17 +388,17 @@ export default function AuroraPlayground() {
               }}
               spellCheck={false}
               aria-label={pg.editorLabel}
-              className="min-h-[380px] w-full resize-y bg-transparent p-3 font-mono text-[13px] leading-6 text-slate-200 outline-none placeholder:text-slate-600"
+              className="min-h-[380px] w-full resize-y bg-transparent p-3 font-mono text-[13px] leading-6 text-fog outline-none placeholder:text-dim"
             />
           </div>
-          <label className="mt-3 flex items-center gap-2 text-[13px] text-slate-400">
+          <label className="mt-3 flex items-center gap-2 text-[13px] text-muted">
             <span className="font-medium">{pg.stdinLabel}</span>
             <input
               value={stdinText}
               onChange={(e) => setStdinText(e.target.value)}
               placeholder={pg.stdinPlaceholder}
               aria-label={pg.stdinLabel}
-              className="w-full rounded-lg border border-white/[0.08] bg-[#0c0f16] px-3 py-2 font-mono text-[13px] text-slate-200 outline-none placeholder:text-slate-600 focus:border-cyan-300/50"
+              className="w-full rounded-lg border border-line bg-surface px-3 py-2 font-mono text-[13px] text-fog outline-none placeholder:text-dim focus:border-accent/50"
             />
           </label>
         </div>
@@ -406,27 +406,27 @@ export default function AuroraPlayground() {
         {/* side: console + registers */}
         <div className="flex flex-col gap-4 lg:col-span-2">
           <div>
-            <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
+            <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-dim">
               {pg.consoleLabel}
             </p>
             <div
               ref={consoleRef}
-              className="h-48 overflow-y-auto rounded-xl border border-white/[0.08] bg-[#0a0d13] p-3 font-mono text-[13px] leading-6"
+              className="h-48 overflow-y-auto rounded-xl border border-line bg-surface p-3 font-mono text-[13px] leading-6"
             >
               {stdout ? (
-                <pre className="whitespace-pre-wrap text-slate-200">{stdout}</pre>
+                <pre className="whitespace-pre-wrap text-fog">{stdout}</pre>
               ) : (
-                <p className="text-slate-600">{pg.consoleHint}</p>
+                <p className="text-dim">{pg.consoleHint}</p>
               )}
               {haltedExit !== null && (
-                <p className="mt-2 text-emerald-300">{pg.haltedMsg.replace("{n}", String(haltedExit))}</p>
+                <p className="mt-2 text-ok">{pg.haltedMsg.replace("{n}", String(haltedExit))}</p>
               )}
-              {fatalMsg && <p className="mt-2 text-red-400">{fatalMsg}</p>}
+              {fatalMsg && <p className="mt-2 text-danger">{fatalMsg}</p>}
             </div>
           </div>
 
           <div>
-            <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
+            <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-dim">
               {pg.regsLabel}
             </p>
             <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -444,7 +444,7 @@ export default function AuroraPlayground() {
                 <span
                   key={name}
                   className={`flex-1 rounded-lg border px-2 py-1.5 text-center font-mono text-[12px] font-bold ${
-                    on ? "border-cyan-300/40 bg-cyan-400/15 text-cyan-300" : "border-white/[0.06] bg-white/[0.02] text-slate-600"
+                    on ? "border-accent/40 bg-accent/15 text-accent" : "border-line bg-tint/[0.02] text-dim"
                   }`}
                 >
                   {name}
@@ -458,21 +458,21 @@ export default function AuroraPlayground() {
       {/* disassembly + stack */}
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <div>
-          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
+          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-dim">
             {pg.disasmLabel}
           </p>
-          <div className="h-64 overflow-auto rounded-xl border border-white/[0.08] bg-[#0a0d13] p-3 font-mono text-[13px] leading-6">
+          <div className="h-64 overflow-auto rounded-xl border border-line bg-surface p-3 font-mono text-[13px] leading-6">
             {disasm.length === 0 ? (
-              <p className="text-slate-600">—</p>
+              <p className="text-dim">—</p>
             ) : (
               disasm.map((l) => {
                 const current = vm !== null && vm.pc === l.offset;
                 return (
                   <div
                     key={l.offset}
-                    className={`flex gap-3 rounded px-2 ${current ? "bg-cyan-400/15 text-cyan-200" : "text-slate-400"}`}
+                    className={`flex gap-3 rounded px-2 ${current ? "bg-accent/15 text-accent" : "text-muted"}`}
                   >
-                    <span className="w-14 shrink-0 text-slate-600">{hexAddr(l.offset)}</span>
+                    <span className="w-14 shrink-0 text-dim">{hexAddr(l.offset)}</span>
                     <span className="whitespace-pre">{l.text}</span>
                   </div>
                 );
@@ -481,18 +481,18 @@ export default function AuroraPlayground() {
           </div>
         </div>
         <div>
-          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
+          <p className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-dim">
             {pg.stackLabel}
           </p>
-          <div className="h-64 overflow-auto rounded-xl border border-white/[0.08] bg-[#0a0d13] p-3 font-mono text-[13px] leading-6">
+          <div className="h-64 overflow-auto rounded-xl border border-line bg-surface p-3 font-mono text-[13px] leading-6">
             {stackRows.length === 0 ? (
-              <p className="text-slate-600">{pg.stackEmpty}</p>
+              <p className="text-dim">{pg.stackEmpty}</p>
             ) : (
               stackRows.map((r) => (
-                <div key={r.addr} className="flex gap-3 px-2 text-slate-300">
-                  <span className="w-14 shrink-0 text-slate-600">{hexAddr(r.addr)}</span>
+                <div key={r.addr} className="flex gap-3 px-2 text-muted">
+                  <span className="w-14 shrink-0 text-dim">{hexAddr(r.addr)}</span>
                   <span>{r.value}</span>
-                  {vm && r.addr === vm.sp && <span className="text-cyan-300/70">← SP</span>}
+                  {vm && r.addr === vm.sp && <span className="text-accent/70">← SP</span>}
                 </div>
               ))
             )}

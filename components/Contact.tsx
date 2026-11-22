@@ -57,12 +57,12 @@ export default function Contact() {
     <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
       <SectionHead eyebrow={t.contact.eyebrow} title={t.contact.title} />
       <Reveal delay={100}>
-        <p className="mt-3 max-w-xl text-[15px] text-slate-400">{t.contact.subtitle}</p>
+        <p className="mt-3 max-w-xl text-[15px] text-muted">{t.contact.subtitle}</p>
       </Reveal>
 
       {/* intent-driven CTAs */}
       <div className="mt-10">
-        <h2 className="font-code mb-4 text-[12px] tracking-[0.25em] text-cyan-300/90 uppercase">
+        <h2 className="font-code mb-4 text-[12px] tracking-[0.25em] text-accent/90 uppercase">
           {"// "}{t.contact.intentsTitle}
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -70,13 +70,13 @@ export default function Contact() {
             <Reveal key={intent.label} delay={140 + i * 80}>
               <a
                 href={gmailCompose(intent.subject)}
-                className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-[#0c0f16]/85 p-5 transition-all hover:-translate-y-0.5 hover:border-cyan-300/30"
+                className="spotlight-card hairline group flex h-full flex-col rounded-2xl bg-surface/85 p-5 transition-all hover:-translate-y-0.5 hover:border-accent/30"
               >
-                <span className="font-display text-[15px] font-semibold text-white transition-colors group-hover:text-cyan-200">
+                <span className="font-display text-[15px] font-semibold text-fog transition-colors group-hover:text-accent">
                   {intent.label}
                 </span>
-                <span className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-400">{intent.desc}</span>
-                <span className="font-display mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-cyan-300">
+                <span className="mt-2 flex-1 text-[13px] leading-relaxed text-muted">{intent.desc}</span>
+                <span className="font-display mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
                   {t.contact.sendEmail}
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M7 17L17 7M7 7h10v10" />
@@ -92,12 +92,12 @@ export default function Contact() {
         {cards.map((c, i) => {
           const inner = (
             <>
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-300">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
                 {c.icon}
               </span>
               <span>
-                <span className="block text-[12px] font-medium uppercase tracking-wider text-slate-500">{c.label}</span>
-                <span className="font-display mt-0.5 block text-[15px] font-semibold text-white">{c.value}</span>
+                <span className="block text-[12px] font-medium uppercase tracking-wider text-dim">{c.label}</span>
+                <span className="font-display mt-0.5 block text-[15px] font-semibold text-fog">{c.value}</span>
               </span>
             </>
           );
@@ -108,12 +108,12 @@ export default function Contact() {
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="spotlight-card hairline flex items-center gap-4 rounded-2xl bg-[#0c0f16]/85 p-5 transition-all hover:-translate-y-0.5 hover:border-cyan-300/25"
+                  className="spotlight-card hairline flex items-center gap-4 rounded-2xl bg-surface/85 p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25"
                 >
                   {inner}
                 </a>
               ) : (
-                <div className="hairline flex items-center gap-4 rounded-2xl bg-[#0c0f16]/85 p-5">{inner}</div>
+                <div className="hairline flex items-center gap-4 rounded-2xl bg-surface/85 p-5">{inner}</div>
               )}
             </Reveal>
           );
@@ -121,20 +121,20 @@ export default function Contact() {
       </div>
 
       <Reveal delay={300}>
-        <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-400/[0.08] to-transparent p-6 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/[0.08] to-transparent p-6 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-300 text-[#07090d]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-ink">
               {icons.file}
             </span>
             <div>
-              <p className="font-display text-[15px] font-semibold text-white">{t.contact.cvLabel}</p>
-              <p className="font-code text-[12px] text-slate-500">{t.contact.cvHint}</p>
+              <p className="font-display text-[15px] font-semibold text-fog">{t.contact.cvLabel}</p>
+              <p className="font-code text-[12px] text-dim">{t.contact.cvHint}</p>
             </div>
           </div>
           <a
             href="/cv/Lucas_Welter_Bohrer_CV.pdf"
             download
-            className="font-display rounded-xl bg-cyan-300 px-6 py-3 text-[15px] font-semibold text-[#07090d] shadow-[0_0_28px_rgba(56,225,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(56,225,255,0.5)]"
+            className="font-display rounded-xl bg-accent px-6 py-3 text-[15px] font-semibold text-ink shadow-[0_0_28px_rgba(56,225,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(56,225,255,0.5)]"
           >
             {t.contact.cvLabel}
           </a>
