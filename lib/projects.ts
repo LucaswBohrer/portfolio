@@ -253,6 +253,7 @@ export const projects: Project[] = [
   {
     slug: "sol-e-mar",
     repo: "LucaswBohrer/sol-e-mar",
+    demoUrl: "https://sol-e-mar-zeta.vercel.app",
     language: "TypeScript",
     tags: { pt: ["TypeScript", "Next.js", "Three.js", "Motion"], en: ["TypeScript", "Next.js", "Three.js", "Motion"], es: ["TypeScript", "Next.js", "Three.js", "Motion"] },
     categories: ["web"],
