@@ -251,6 +251,24 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "sol-e-mar",
+    repo: "LucaswBohrer/sol-e-mar",
+    language: "TypeScript",
+    tags: { pt: ["TypeScript", "Next.js", "Three.js", "Motion"], en: ["TypeScript", "Next.js", "Three.js", "Motion"], es: ["TypeScript", "Next.js", "Three.js", "Motion"] },
+    categories: ["web"],
+    title: { pt: "SOL & MAR", en: "SOL & MAR", es: "SOL & MAR" },
+    description: {
+      pt: "Experiência web criativa no molde do SKY & BLOOM — sol dourado, ondas e pôr do sol em 3D interativo, com experimentos de física das ondas e laboratório do pôr do sol.",
+      en: "Creative web experience in the SKY & BLOOM mould — golden sun, waves and sunset in interactive 3D, with wave-physics experiments and a sunset lab.",
+      es: "Experiencia web creativa en el molde de SKY & BLOOM — sol dorado, olas y atardecer en 3D interactivo, con experimentos de física de olas y laboratorio del atardecer.",
+    },
+    highlights: {
+      pt: ["Hero 3D com sol e ondas", "3 experimentos interativos", "Playground com 4 estações"],
+      en: ["3D hero with sun and waves", "3 interactive experiments", "Playground with 4 stations"],
+      es: ["Hero 3D con sol y olas", "3 experimentos interactivos", "Playground con 4 estaciones"],
+    },
+  },
+  {
     slug: "flowsuite",
     repo: "LucaswBohrer/flowsuite",
     demoUrl: "https://flowsuite-sooty.vercel.app",
