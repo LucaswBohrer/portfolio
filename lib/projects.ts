@@ -295,7 +295,7 @@ export const projects: Project[] = [
   {
     slug: "loja-bohrer-3d",
     repo: "LucaswBohrer/loja-bohrer-3d",
-    demoUrl: "https://loja-bohrer-3d.vercel.app",
+    demoUrl: "https://catalogo-3d-digital.vercel.app",
     language: "HTML",
     tags: ["HTML", "JavaScript", "E-commerce", "Pix"],
     categories: ["web"],
