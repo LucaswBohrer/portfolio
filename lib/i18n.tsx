@@ -70,6 +70,7 @@ export interface Dict {
     title: string;
     subtitle: string;
     viewRepo: string;
+    viewLive: string;
     viewCase: string;
     hideCase: string;
     privateRepo: string;
@@ -283,6 +284,7 @@ const pt: Dict = {
     title: "Trabalho selecionado.",
     subtitle: "Dois cases em profundidade e uma seleção de repositórios — sistemas reais, não demos de mentira.",
     viewRepo: "Ver repositório",
+    viewLive: "Ver site ao vivo",
     viewCase: "Ver case",
     hideCase: "Ocultar case",
     privateRepo: "Repositório privado",
@@ -604,6 +606,7 @@ const en: Dict = {
     title: "Selected work.",
     subtitle: "Two in-depth cases plus a curated set of repositories — real systems, not fake demos.",
     viewRepo: "View repository",
+    viewLive: "View live site",
     viewCase: "View case",
     hideCase: "Hide case",
     privateRepo: "Private repository",

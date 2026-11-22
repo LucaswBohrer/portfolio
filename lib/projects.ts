@@ -3,6 +3,8 @@ export type Category = "ai" | "automation" | "web" | "embedded" | "systems";
 export interface Project {
   slug: string;
   repo: string | null; // null = private / no public link
+  /** public live URL (landing page / deployed demo), if any */
+  demoUrl?: string;
   language: string;
   featured?: boolean;
   tags: string[];
@@ -129,6 +131,7 @@ export const projects: Project[] = [
   {
     slug: "nexa",
     repo: "LucaswBohrer/nexa-landing-page",
+    demoUrl: "https://nexa-landing-page-fawn.vercel.app",
     language: "TypeScript",
     tags: ["TypeScript", "Landing Page", "UI/UX"],
     categories: ["web"],
@@ -209,6 +212,7 @@ export const projects: Project[] = [
   {
     slug: "sky-and-bloom",
     repo: "LucaswBohrer/sky-and-bloom",
+    demoUrl: "https://sky-and-bloom.vercel.app",
     language: "TypeScript",
     tags: ["TypeScript", "Next.js", "Three.js", "Motion"],
     categories: ["web"],
@@ -225,6 +229,7 @@ export const projects: Project[] = [
   {
     slug: "flowsuite",
     repo: "LucaswBohrer/flowsuite",
+    demoUrl: "https://flowsuite-sooty.vercel.app",
     language: "TypeScript",
     tags: ["TypeScript", "React", "draw.io", "TIA Portal"],
     categories: ["web", "automation"],
@@ -257,6 +262,7 @@ export const projects: Project[] = [
   {
     slug: "sistema-os",
     repo: null,
+    demoUrl: "https://sistema-os.bohrer-welter-lucas.workers.dev",
     language: "TypeScript",
     tags: ["TypeScript", "Cloudflare Workers", "Drizzle", "Gestão"],
     categories: ["web", "automation"],
@@ -289,6 +295,7 @@ export const projects: Project[] = [
   {
     slug: "loja-bohrer-3d",
     repo: "LucaswBohrer/loja-bohrer-3d",
+    demoUrl: "https://loja-bohrer-3d.vercel.app",
     language: "HTML",
     tags: ["HTML", "JavaScript", "E-commerce", "Pix"],
     categories: ["web"],
