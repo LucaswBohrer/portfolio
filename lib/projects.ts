@@ -299,7 +299,7 @@ export const projects: Project[] = [
     language: "HTML",
     tags: ["HTML", "JavaScript", "E-commerce", "Pix"],
     categories: ["web"],
-    title: { pt: "Loja Bohrer 3D", en: "Loja Bohrer 3D" },
+    title: { pt: "3D Digital", en: "3D Digital" },
     description: {
       pt: "Loja online de impressão 3D personalizada sob encomenda: vitrine com catálogo aprovado, carrinho e checkout por Pix com confirmação no WhatsApp.",
       en: "Online store for made-to-order custom 3D prints: curated catalog storefront, cart and Pix checkout confirmed over WhatsApp.",
