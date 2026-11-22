@@ -206,6 +206,134 @@ export const projects: Project[] = [
       en: ["Autonomous agent", "Web research", "Recommendations"],
     },
   },
+  {
+    slug: "sky-and-bloom",
+    repo: "LucaswBohrer/sky-and-bloom",
+    language: "TypeScript",
+    tags: ["TypeScript", "Next.js", "Three.js", "Motion"],
+    categories: ["web"],
+    title: { pt: "SKY & BLOOM", en: "SKY & BLOOM" },
+    description: {
+      pt: "Experiência web criativa e imersiva: movimento, interação, cor e experimentação digital — Next.js 16, React 19, Tailwind v4, Motion e Three.js.",
+      en: "Immersive creative web experience: motion, interaction, color and digital experimentation — Next.js 16, React 19, Tailwind v4, Motion and Three.js.",
+    },
+    highlights: {
+      pt: ["Cenas 3D com Three.js", "Motion e interação", "Em produção"],
+      en: ["3D scenes with Three.js", "Motion and interaction", "Live in production"],
+    },
+  },
+  {
+    slug: "flowsuite",
+    repo: "LucaswBohrer/flowsuite",
+    language: "TypeScript",
+    tags: ["TypeScript", "React", "draw.io", "TIA Portal"],
+    categories: ["web", "automation"],
+    title: { pt: "FlowSuite", en: "FlowSuite" },
+    description: {
+      pt: "Sistema que abre um fluxograma draw.io e deriva o resto: tabelas, elétrica, BOM, etiquetas e geração de código para TIA Portal — tudo processado no navegador.",
+      en: "System that opens a draw.io flowchart and derives the rest: tables, electrical, BOM, labels and TIA Portal code generation — all processed in the browser.",
+    },
+    highlights: {
+      pt: ["Parser próprio de draw.io", "Geração TIA Portal (SCL)", "100% local, sem upload"],
+      en: ["Custom draw.io parser", "TIA Portal generation (SCL)", "100% local, no upload"],
+    },
+  },
+  {
+    slug: "ai-factory",
+    repo: "LucaswBohrer/ai-factory",
+    language: "Python",
+    tags: ["Python", "Agentes de IA", "Auditoria", "Ledger"],
+    categories: ["ai", "systems"],
+    title: { pt: "AI Factory", en: "AI Factory" },
+    description: {
+      pt: "Fábrica de agentes com governança: protocolo multi-agente (execução, arquitetura, red-team), auditor determinístico de 38 regras e ledger append-only de créditos.",
+      en: "Agent factory with governance: multi-agent protocol (execution, architecture, red-team), deterministic 38-rule auditor and append-only credit ledger.",
+    },
+    highlights: {
+      pt: ["Auditor determinístico v3.0.0", "Ledger de créditos", "Protocolo LTP v1.4"],
+      en: ["Deterministic auditor v3.0.0", "Credit ledger", "LTP protocol v1.4"],
+    },
+  },
+  {
+    slug: "sistema-os",
+    repo: null,
+    language: "TypeScript",
+    tags: ["TypeScript", "Cloudflare Workers", "Drizzle", "Gestão"],
+    categories: ["web", "automation"],
+    title: { pt: "Sistema de OS", en: "Sistema de OS" },
+    description: {
+      pt: "Sistema web de gestão para assistência técnica: ordens de serviço, clientes, estoque, vendas, financeiro, garantias e relatórios — em uso real na loja.",
+      en: "Web management system for electronics repair: service orders, customers, stock, sales, finance, warranties and reports — in real use at the shop.",
+    },
+    highlights: {
+      pt: ["Em uso real na loja", "OS, estoque e financeiro", "Cloudflare Workers + Drizzle"],
+      en: ["In real use at the shop", "Orders, stock and finance", "Cloudflare Workers + Drizzle"],
+    },
+  },
+  {
+    slug: "axion-robot",
+    repo: null,
+    language: "C++",
+    tags: ["ESP32-S3", "C++", "MQTT", "Robótica"],
+    categories: ["embedded", "ai"],
+    title: { pt: "Axion — robô companheiro", en: "Axion — companion robot" },
+    description: {
+      pt: "Robô companheiro com ESP32-S3: rosto animado em display TFT, sensor de presença, alto-falante e microfone, painel de configuração via Wi-Fi e ponte MQTT.",
+      en: "Companion robot on ESP32-S3: animated face on a TFT display, presence sensor, speaker and microphone, Wi-Fi config panel and MQTT bridge.",
+    },
+    highlights: {
+      pt: ["Olhos animados em TFT", "Sensor de presença VL53L0X", "OTA dual-slot"],
+      en: ["Animated eyes on TFT", "VL53L0X presence sensor", "Dual-slot OTA"],
+    },
+  },
+  {
+    slug: "loja-bohrer-3d",
+    repo: "LucaswBohrer/loja-bohrer-3d",
+    language: "HTML",
+    tags: ["HTML", "JavaScript", "E-commerce", "Pix"],
+    categories: ["web"],
+    title: { pt: "Loja Bohrer 3D", en: "Loja Bohrer 3D" },
+    description: {
+      pt: "Loja online de impressão 3D personalizada sob encomenda: vitrine com catálogo aprovado, carrinho e checkout por Pix com confirmação no WhatsApp.",
+      en: "Online store for made-to-order custom 3D prints: curated catalog storefront, cart and Pix checkout confirmed over WhatsApp.",
+    },
+    highlights: {
+      pt: ["Loja real em produção", "Checkout Pix", "Catálogo sob encomenda"],
+      en: ["Real store in production", "Pix checkout", "Made-to-order catalog"],
+    },
+  },
+  {
+    slug: "nullshift",
+    repo: "LucaswBohrer/nullshift",
+    language: "Python",
+    tags: ["Python", "Pygame", "Game Dev", "Puzzle"],
+    categories: ["systems"],
+    title: { pt: "NULL//SHIFT", en: "NULL//SHIFT" },
+    description: {
+      pt: "Jogo puzzle 2D top-down com mecânica de eco temporal: o jogador coopera com os próprios ecos do passado — vertical slice jogável em Pygame.",
+      en: "2D top-down puzzle game with a temporal-echo mechanic: the player cooperates with echoes of their own past — playable vertical slice in Pygame.",
+    },
+    highlights: {
+      pt: ["Mecânica de eco temporal", "Vertical slice jogável", "Pygame"],
+      en: ["Temporal-echo mechanic", "Playable vertical slice", "Pygame"],
+    },
+  },
+  {
+    slug: "eletronica-digital",
+    repo: "LucaswBohrer/Eletronica-Digital",
+    language: "TypeScript",
+    tags: ["TypeScript", "React", "Tailwind", "Vite"],
+    categories: ["web"],
+    title: { pt: "Eletrônica Digital NH", en: "Eletrônica Digital NH" },
+    description: {
+      pt: "Site da Eletrônica Digital NH: assistência técnica com mais de 30 anos — Smart TVs, som automotivo, micro-ondas e eletrônica automotiva.",
+      en: "Website for Eletrônica Digital NH: electronics repair shop with 30+ years — smart TVs, car audio, microwaves and automotive electronics.",
+    },
+    highlights: {
+      pt: ["Site real de negócio local", "React 19 + Tailwind 4", "Design responsivo"],
+      en: ["Real local business site", "React 19 + Tailwind 4", "Responsive design"],
+    },
+  },
 ];
 
 export function repoUrl(p: Project): string | null {
