@@ -318,22 +318,6 @@ export const projects: Project[] = [
       en: ["Temporal-echo mechanic", "Playable vertical slice", "Pygame"],
     },
   },
-  {
-    slug: "eletronica-digital",
-    repo: "LucaswBohrer/Eletronica-Digital",
-    language: "TypeScript",
-    tags: ["TypeScript", "React", "Tailwind", "Vite"],
-    categories: ["web"],
-    title: { pt: "Eletrônica Digital NH", en: "Eletrônica Digital NH" },
-    description: {
-      pt: "Site da Eletrônica Digital NH: assistência técnica com mais de 30 anos — Smart TVs, som automotivo, micro-ondas e eletrônica automotiva.",
-      en: "Website for Eletrônica Digital NH: electronics repair shop with 30+ years — smart TVs, car audio, microwaves and automotive electronics.",
-    },
-    highlights: {
-      pt: ["Site real de negócio local", "React 19 + Tailwind 4", "Design responsivo"],
-      en: ["Real local business site", "React 19 + Tailwind 4", "Responsive design"],
-    },
-  },
 ];
 
 export function repoUrl(p: Project): string | null {
