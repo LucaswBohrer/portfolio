@@ -270,6 +270,25 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "noir",
+    repo: "LucaswBohrer/noir",
+    demoUrl: "https://noir-two-lac.vercel.app",
+    language: "TypeScript",
+    tags: { pt: ["TypeScript", "Next.js", "Tailwind", "Motion"], en: ["TypeScript", "Next.js", "Tailwind", "Motion"], es: ["TypeScript", "Next.js", "Tailwind", "Motion"] },
+    categories: ["web"],
+    title: { pt: "NOIR", en: "NOIR", es: "NOIR" },
+    description: {
+      pt: "Landing page de um SaaS fictício de orquestração de agentes de IA — agentes autônomos operando em segundo plano, com console de operações ao vivo, 4 agentes e preços com toggle mensal/anual.",
+      en: "Landing page for a fictional AI-agent orchestration SaaS — autonomous agents working in the background, with a live operations console, 4 agents and a monthly/annual pricing toggle.",
+      es: "Landing page de un SaaS ficticio de orquestación de agentes de IA — agentes autónomos operando en segundo plano, con consola de operaciones en vivo, 4 agentes y precios con cambio mensual/anual.",
+    },
+    highlights: {
+      pt: ["Console de operações ao vivo", "4 agentes (ATLAS, LUMEN, VEGA, ÍRIS)", "Preços mensal/anual"],
+      en: ["Live operations console", "4 agents (ATLAS, LUMEN, VEGA, ÍRIS)", "Monthly/annual pricing"],
+      es: ["Consola de operaciones en vivo", "4 agentes (ATLAS, LUMEN, VEGA, ÍRIS)", "Precios mensual/anual"],
+    },
+  },
+  {
     slug: "flowsuite",
     repo: "LucaswBohrer/flowsuite",
     demoUrl: "https://flowsuite-sooty.vercel.app",
