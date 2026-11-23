@@ -289,6 +289,25 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "vortex",
+    repo: "LucaswBohrer/vortex",
+    demoUrl: "https://vortex-pied-rho.vercel.app",
+    language: "TypeScript",
+    tags: { pt: ["TypeScript", "Next.js", "Tailwind", "Motion"], en: ["TypeScript", "Next.js", "Tailwind", "Motion"], es: ["TypeScript", "Next.js", "Tailwind", "Motion"] },
+    categories: ["web"],
+    title: { pt: "VORTEX", en: "VORTEX", es: "VORTEX" },
+    description: {
+      pt: "Landing page de uma fintech fictícia de pagamentos — Pix, cartão, boleto e assinaturas em tempo real, com console de pagamentos ao vivo, cartão 3D, simulador de taxas, dashboard interativo e antifraude.",
+      en: "Landing page for a fictional payments fintech — Pix, cards, boleto and subscriptions in real time, with a live payments console, 3D card, fee simulator, interactive dashboard and antifraud.",
+      es: "Landing page de una fintech ficticia de pagos — Pix, tarjeta, boleto y suscripciones en tiempo real, con consola de pagos en vivo, tarjeta 3D, simulador de tasas, panel interactivo y antifraude.",
+    },
+    highlights: {
+      pt: ["Simulador de taxas com matemática real", "Cartão 3D com glare", "Antifraude com regras ligáveis"],
+      en: ["Fee simulator with real math", "3D card with glare", "Antifraud with toggleable rules"],
+      es: ["Simulador de tasas con matemática real", "Tarjeta 3D con brillo", "Antifraude con reglas activables"],
+    },
+  },
+  {
     slug: "flowsuite",
     repo: "LucaswBohrer/flowsuite",
     demoUrl: "https://flowsuite-sooty.vercel.app",
