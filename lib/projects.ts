@@ -308,6 +308,24 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "circuito-lab",
+    repo: "LucaswBohrer/circuito-lab",
+    language: "Java",
+    tags: { pt: ["Java", "Swing", "MNA", "Circuitos"], en: ["Java", "Swing", "MNA", "Circuits"], es: ["Java", "Swing", "MNA", "Circuitos"] },
+    categories: ["systems"],
+    title: { pt: "CircuitoLab", en: "CircuitoLab", es: "CircuitoLab" },
+    description: {
+      pt: "Simulador de circuitos elétricos em Java puro (JDK 21, zero dependências): análise DC por MNA com solver próprio, interface Swing para desenhar e editar circuitos, CLI com exportação CSV/relatório e exemplos.",
+      en: "Electrical circuit simulator in pure Java (JDK 21, zero dependencies): DC analysis via MNA with a custom solver, Swing GUI to draw and edit circuits, CLI with CSV/report export and examples.",
+      es: "Simulador de circuitos eléctricos en Java puro (JDK 21, cero dependencias): análisis DC por MNA con solver propio, interfaz Swing para dibujar y editar circuitos, CLI con exportación CSV/informe y ejemplos.",
+    },
+    highlights: {
+      pt: ["Análise DC por MNA", "Solver próprio (Gauss + pivotamento)", "11/11 testes passando"],
+      en: ["DC analysis via MNA", "Custom solver (Gaussian elimination + pivoting)", "11/11 tests passing"],
+      es: ["Análisis DC por MNA", "Solver propio (Gauss + pivotamiento)", "11/11 pruebas pasando"],
+    },
+  },
+  {
     slug: "flowsuite",
     repo: "LucaswBohrer/flowsuite",
     demoUrl: "https://flowsuite-sooty.vercel.app",
